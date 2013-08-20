@@ -1,0 +1,48 @@
+doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title= siteTitle
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="author", content="Calvin 'calzoneman' 'cyzon' Montgomery")
+
+    link(href="css/bootstrap.css", rel="stylesheet")
+    link(href="css/navbar-footer.css", rel="stylesheet")
+    link(href="css/ytsync.css", rel="stylesheet")
+
+  body
+    #wrap
+      .navbar.navbar-inverse.navbar-fixed-top
+        .container
+          .navbar-header
+            a.navbar-brand(href="index.html")= siteTitle
+          .ul.nav.navbar-nav
+            li.active: a(href="index.html") Home
+            li
+              a(href="https://github.com/calzoneman/sync/wiki/Beginner%27s-Guide-and-FAQ", target="_blank") Help
+            li: a(href="account.html") Account
+      .container
+        .row
+          .col-lg-8
+            h3 Public Channels
+            table#channeldata.table.table-striped.table-bordered
+              thead
+                tr
+                  th Channel
+                  th Connected
+                  th Playing
+          .col-lg-4
+            h3 Enter Channel
+            input#channel.form-control.input-block-level(type="text", placeholder="Channel Name")
+            br
+            .alert.alert-info
+              <strong>Note: </strong> to register a channel, simply enter a channel name that isn't being used.  The first person to join will have temporary administrator status of that channel, and the channel can be registered by clicking the button on the blue prompt that appears.
+      #sitefooter
+    #footer
+      .container
+        p.muted.credit.
+          CyTube Software Copyright &copy; 2013 Calvin Montgomery&nbsp;&middot;&nbsp;Available for free on <a href="http://github.com/calzoneman/sync">GitHub</a>&nbsp;&middot;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5Y7PUVVGVSEWG&lc=US&item_name=CyTube&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Donate</a>
+    script(src="js/jquery.js")
+    script(src="js/bootstrap.js")
+    script(src="js/respond.js")
+    script(src="js/index-page.js")
