@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CyTube</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Calvin 'calzoneman 'cyzon' Montgomery">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/navbar-footer.css" rel="stlyesheet">
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header"><a href="index.html" class="navbar-brand">CyTube</a></div>
+          <div class="ul nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="https://github.com/calzoneman/sync/wiki/Beginner%27s-Guide-and-FAQ" target="_blank">Help</a></li>
+            <li><a href="account.html">Account</a></li>
+          </div>
+          <form id="loginform" class="navbar-form navbar-right">
+            <div class="form-group">
+              <input id="guestname" type="text" placeholder="Name" class="form-control">
+            </div>
+            <button id="guestlogin" class="btn btn-default">Guest Login</button>
+            <button id="login" class="btn btn-default">Login</button>
+          </form>
+          <div id="logoutform" style="display: none" class="navbar-right">
+            <p id="welcome" class="navbar-text"></p>
+          </div>
+        </div>
+      </div>
+      <div id="mainpage" class="container">
+        <div id="toprow" class="row">
+          <div id="motd" class="well col-lg-12"></div>
+          <div id="drinkbar" class="col-lg-12">
+            <h1 id="drinkcount"></h1>
+          </div>
+        </div>
+        <div id="announcements" class="row"></div>
+        <div id="main" class="row">
+          <div id="chatwrap" class="col-lg-5">
+            <div id="usercountwrap" class="pointer"><i id="userlisttoggle" title="Show/Hide Userlist" class="glyphicon glyphicon-chevron-up pull-left"></i>
+              <p id="usercount">Not Connected</p>
+            </div>
+            <div id="userlist"></div>
+            <div id="messagebuffer"></div>
+            <input id="chatline" type="text" maxlength="240" class="form-control">
+          </div>
+          <div id="videowrap" class="col-lg-7">
+            <p id="currenttitle">Nothing Playling</p>
+            <div id="ytapiplayer"></div>
+          </div>
+        </div>
+        <div id="playlistrow" class="row">
+          <div id="leftpane" class="col-lg-5">
+            <div id="leftpane-inner" class="row">
+              <div id="pollbtnwrap" class="col-lg-12">
+                <button id="newpollbtn" class="btn btn-small btn-default">New Poll</button>
+              </div>
+              <div id="pollwrap" class="col-lg-12"></div>
+              <div id="searchwrap" class="col-lg-12">
+                <div id="searchpanel" class="panel panel-default">
+                  <div class="panel-heading"><a id="librarytoggle" href="javascript:void(0)">Library/YouTube Search</a></div>
+                  <div id="librarywrap" class="panel-body">
+                    <div class="row">
+                      <div id="querywrap" class="col-lg-6">
+                        <input id="library_query" type="text" class="form-control">
+                      </div>
+                      <div id="searchbtns" class="col-lg-6 btn-group">
+                        <button id="library_search" class="btn btn-default">Library</button>
+                        <button id="youtube_search" class="btn btn-default">YouTube</button>
+                      </div>
+                    </div>
+                    <ul id="library" class="videolist col-lg-12"></ul>
+                  </div>
+                </div>
+              </div>
+              <div id="userpltogglewrap" class="panel panel-default">
+                <div class="panel-heading"><a id="userpltoggle" href="javascript:void(0)">Playlist Manager</a></div>
+                <div id="userplaylistwrap" class="panel-body">
+                  <div class="row">
+                    <div class="col-lg-7">
+                      <input id="userpl_name" type="text" placeholder="Playlist Name" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="rightpane" class="col-lg-7">
+            <div id="rightpane-inner" class="row"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

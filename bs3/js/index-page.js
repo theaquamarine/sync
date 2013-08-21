@@ -78,6 +78,7 @@ $(function () {
     };
 
     setInterval(refresh, 10000);
+    refresh();
 
     $("#channel").keydown(function (ev) {
         if(ev.keyCode == 13) {

@@ -1,0 +1,75 @@
+doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title= siteTitle
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="author", content="Calvin 'calzoneman 'cyzon' Montgomery")
+
+    link(href="css/bootstrap.css", rel="stylesheet")
+    link(href="css/navbar-footer.css", rel="stlyesheet")
+
+  body
+    #wrap
+      .navbar.navbar-inverse.navbar-fixed-top
+        .container
+          .navbar-header
+            a.navbar-brand(href="index.html")= siteTitle
+          .ul.nav.navbar-nav
+            li.active: a(href="index.html") Home
+            li
+              a(href="https://github.com/calzoneman/sync/wiki/Beginner%27s-Guide-and-FAQ", target="_blank") Help
+            li: a(href="account.html") Account
+          form#loginform.navbar-form.navbar-right
+            .form-group
+              input#guestname.form-control(type="text", placeholder="Name")
+            button#guestlogin.btn.btn-default Guest Login
+            button#login.btn.btn-default Login
+          #logoutform.navbar-right(style="display: none")
+            p#welcome.navbar-text
+      #mainpage.container
+        #toprow.row
+          #motd.well.col-lg-12
+          #drinkbar.col-lg-12
+            h1#drinkcount
+        #announcements.row
+        #main.row
+          #chatwrap.col-lg-5
+            #usercountwrap.pointer
+              i#userlisttoggle.glyphicon.glyphicon-chevron-up.pull-left(title="Show/Hide Userlist")
+              p#usercount Not Connected
+            #userlist
+            #messagebuffer
+            input#chatline.form-control(type="text", maxlength="240")
+          #videowrap.col-lg-7
+            p#currenttitle Nothing Playling
+            #ytapiplayer
+        #playlistrow.row
+          #leftpane.col-lg-5
+            #leftpane-inner.row
+              #pollbtnwrap.col-lg-12
+                button#newpollbtn.btn.btn-small.btn-default New Poll
+              #pollwrap.col-lg-12
+              #searchwrap.col-lg-12
+                #searchpanel.panel.panel-default
+                  .panel-heading
+                    a#librarytoggle(href="javascript:void(0)") Library/YouTube Search
+                  #librarywrap.panel-body
+                    .row
+                      #querywrap.col-lg-6
+                        input#library_query.form-control(type="text")
+                      #searchbtns.col-lg-6.btn-group
+                        button#library_search.btn.btn-default Library
+                        button#youtube_search.btn.btn-default YouTube
+                    ul#library.videolist.col-lg-12
+              #userpltogglewrap.panel.panel-default
+                .panel-heading
+                  a#userpltoggle(href="javascript:void(0)") Playlist Manager
+                #userplaylistwrap.panel-body
+                  .row
+                    .col-lg-7
+                      input#userpl_name.form-control(type="text", placeholder="Playlist Name")
+          #rightpane.col-lg-7
+            #rightpane-inner.row
+              
+          
