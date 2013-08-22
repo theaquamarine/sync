@@ -33,8 +33,11 @@
       </div>
       <div id="mainpage" class="container">
         <div id="toprow" class="row">
-          <div id="motd" class="well col-lg-12"></div>
-          <div id="drinkbar" class="col-lg-12">
+          <div id="motdwrap" class="col-lg-12">
+            <div id="motd" class="well"></div>
+          </div>
+          <div id="drinkbarwrap" class="col-lg-12">
+            <div id="drinkbar"></div>
             <h1 id="drinkcount"></h1>
           </div>
         </div>
@@ -66,7 +69,7 @@
                     <div class="panel-heading">
                       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#searchpanel-group" href="#librarywrap" class="accordion-toggle">Library/YouTube Search</a></h4>
                     </div>
-                    <div id="librarywrap" class="panel-body">
+                    <div id="librarywrap" class="panel-body collapse">
                       <div class="row">
                         <div id="querywrap" class="col-lg-6">
                           <input id="library_query" type="text" class="form-control">
@@ -82,17 +85,21 @@
                 </div>
               </div>
               <div id="playlistmanagerwrap" class="col-lg-12">
-                <div id="playlistmanagerpanel" class="panel panel-default">
-                  <div class="panel-heading"><a id="userpltoggle" href="javascript:void(0)">Playlist Manager</a></div>
-                  <div id="userplaylistwrap" class="panel-body">
-                    <div class="row">
-                      <div class="col-lg-7">
-                        <input id="userpl_name" type="text" placeholder="Playlist Name" class="form-control">
+                <div id="playlistmanager-group" class="panel-group">
+                  <div id="playlistmanagerpanel" class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title"><a id="userpltoggle" data-toggle="collapse" data-parent="playlistmanager-group" href="#userplaylistwrap" class="accordion-toggle">Playlist Manager</a></h4>
+                    </div>
+                    <div id="userplaylistwrap" class="panel-body collapse">
+                      <div class="row">
+                        <div class="col-lg-7">
+                          <input id="userpl_name" type="text" placeholder="Playlist Name" class="form-control">
+                        </div>
+                        <div class="col-lg-5">
+                          <button id="userpl_save" class="btn btn-block btn-default">Save Playlist</button>
+                        </div>
+                        <ul id="userpl_list" class="col-lg-12"></ul>
                       </div>
-                      <div class="col-lg-5">
-                        <button id="userpl_save" class="btn btn-block btn-default">Save Playlist</button>
-                      </div>
-                      <ul id="userpl_list" class="col-lg-12"></ul>
                     </div>
                   </div>
                 </div>
@@ -117,12 +124,59 @@
               </div>
               <div id="queue_align2"></div>
               <div id="plcontrolsouterwrap" class="col-lg-12">
-                <div id="plcontrolspanel" class="panel panel-default">
-                  <div class="panel-heading"><a id="playlisttoggle" href="javascript:void(0)">Show Playlist Controls</a></div>
+                <div id="plcontrols-group" class="panel-group">
+                  <div id="plcontrolspanel" class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#plcontrols-group" href="#playlist_controls" class="accordion-toggle">Playlist Controls</a></h4>
+                    </div>
+                    <div id="playlist_controls" class="panel-body collapse">
+                      <div class="row">
+                        <div class="col-lg-8">
+                          <input id="mediaurl" type="text" placeholder="Media URL" class="form-control input-block-level">
+                        </div>
+                        <div class="col-lg-4 btn-group">
+                          <button id="queue_next" class="btn btn-default">Next</button>
+                          <button id="queue_end" class="btn btn-default">At End</button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div id="customembed_wrap" class="col-lg-12">
+                          <button id="customembed_btn" class="btn btn-default btn-block">Custom Embed</button>
+                          <div id="customembed_entry">
+                            Paste the embed code below and hit Next or End.
+                            Acceptable embed codes are <code>&lt;iframe&gt;</code> and <code>&lt;object&gt;</code> tags.
+                            <textarea id="customembed_code" rows="3" class="input-block-level form-control"></textarea>
+                          </div>
+                        </div>
+                        <div id="extended_controls" class="col-lg-12">
+                          <button id="clearplaylist" class="btn btn-default btn-block">Clear Playlist</button>
+                          <button id="shuffleplaylist" class="btn btn-default btn-block">Shuffle Playlist</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <div id="voteskipwrap" class="col-lg-12 btn-group">
+                <button id="voteskip" class="btn btn-default">Voteskip</button>
+                <button id="getplaylist" class="btn btn-default">Get Playlist URLs</button>
+                <button id="qlockbtn" title="Playlist Locked" class="btn btn-danger"><i class="glyphicon glyphicon-lock"></i></button>
+              </div>
+              <div class="col-lg-12">
+                <div id="queue" class="videolist"></div>
+                <div id="plmeta"><span id="plclount">0 items</span><span id="pllength">00:00:00</span></div>
               </div>
             </div>
           </div>
+        </div>
+        <div id="channelsettingswrap-outer" class="row">
+          <div id="channelsettingswrap-inner" class="col-lg-12">
+            <div id="channelsettingswrap" class="well"></div>
+          </div>
+        </div>
+        <div id="resizewrap" class="row">
+          <div class="col-lg-5"></div>
+          <div id="videowidth" class="col-lg-7"></div>
         </div>
       </div>
     </div>

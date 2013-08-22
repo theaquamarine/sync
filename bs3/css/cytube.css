@@ -32,3 +32,83 @@
     background-color: #000000;
     height: 380px;
 }
+
+#chatwrap, #videowrap {
+    margin-bottom: 10px;
+}
+
+#customembed_wrap {
+    margin: 5px 0;
+}
+
+#plcontrolsouterwrap, #playlistmanagerwrap, #searchwrap, #voteskipwrap {
+    margin-top: 10px;
+}
+
+#channelsettingswrap-outer {
+    margin-top: 20px;
+}
+
+#queue_next, #queue_end, #search_library, #search_youtube {
+    width: 50%;
+}
+
+#voteskip, #getplaylist {
+    width: 46%;
+}
+
+#qlockbtn {
+    width: 8%;
+}
+
+#voteskip, #getplaylist, #qlockbtn {
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#plmeta {
+    border-radius: 4px;
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.videolist {
+    list-style: none outside none;
+    margin-left: 0;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+#plmeta {
+    border: 1px solid #aaaaaa;
+}
+
+#plcount {
+    float: left;
+}
+
+#pllength {
+    float: right;
+}
+
+.qe_btn {
+    height: 20px;
+    font-family: Monospace;
+    padding: 0 5px 0 5px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.qe_buttons, .qe_title, .qe_time {
+    float: left;
+}
+
+.qe_time {
+    font-family: Monospace;
+}
+
+.qe_clear {
+    clear: both;
+}

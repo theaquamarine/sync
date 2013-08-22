@@ -30,8 +30,10 @@ html(lang="en")
             p#welcome.navbar-text
       #mainpage.container
         #toprow.row
-          #motd.well.col-lg-12
-          #drinkbar.col-lg-12
+          #motdwrap.col-lg-12
+            #motd.well
+          #drinkbarwrap.col-lg-12
+            #drinkbar
             h1#drinkcount
         #announcements.row
         #main.row
@@ -57,7 +59,7 @@ html(lang="en")
                     .panel-heading
                       h4.panel-title
                         a.accordion-toggle(data-toggle="collapse", data-parent="#searchpanel-group", href="#librarywrap") Library/YouTube Search
-                    #librarywrap.panel-body
+                    #librarywrap.panel-body.collapse
                       .row
                         #querywrap.col-lg-6
                           input#library_query.form-control(type="text")
@@ -66,16 +68,18 @@ html(lang="en")
                           button#youtube_search.btn.btn-default YouTube
                       ul#library.videolist.col-lg-12
               #playlistmanagerwrap.col-lg-12
-                #playlistmanagerpanel.panel.panel-default
-                  .panel-heading
-                    a#userpltoggle(href="javascript:void(0)") Playlist Manager
-                  #userplaylistwrap.panel-body
-                    .row
-                      .col-lg-7
-                        input#userpl_name.form-control(type="text", placeholder="Playlist Name")
-                      .col-lg-5
-                        button#userpl_save.btn.btn-block.btn-default Save Playlist
-                      ul#userpl_list.col-lg-12
+                #playlistmanager-group.panel-group
+                  #playlistmanagerpanel.panel.panel-default
+                    .panel-heading
+                      h4.panel-title
+                        a#userpltoggle.accordion-toggle(data-toggle="collapse", data-parent="playlistmanager-group", href="#userplaylistwrap") Playlist Manager
+                    #userplaylistwrap.panel-body.collapse
+                      .row
+                        .col-lg-7
+                          input#userpl_name.form-control(type="text", placeholder="Playlist Name")
+                        .col-lg-5
+                          button#userpl_save.btn.btn-block.btn-default Save Playlist
+                        ul#userpl_list.col-lg-12
           #rightpane.col-lg-7
             #rightpane-inner.row
               #qualitywrap.col-lg-12
@@ -95,10 +99,46 @@ html(lang="en")
                 button#mediarefresh.btn.btn-sm.btn-default Refresh Media
               #queue_align2
               #plcontrolsouterwrap.col-lg-12
-                #plcontrolspanel.panel.panel-default
-                  .panel-heading
-                    a#playlisttoggle(href="javascript:void(0)") Show Playlist Controls
+                #plcontrols-group.panel-group
+                  #plcontrolspanel.panel.panel-default
+                    .panel-heading
+                      h4.panel-title
+                        a.accordion-toggle(data-toggle="collapse", data-parent="#plcontrols-group", href="#playlist_controls") Playlist Controls
               
+                    #playlist_controls.panel-body.collapse
+                      .row
+                        .col-lg-8
+                          input#mediaurl.form-control.input-block-level(type="text", placeholder="Media URL")
+                        .col-lg-4.btn-group
+                          button#queue_next.btn.btn-default Next
+                          button#queue_end.btn.btn-default At End
+                      .row
+                        #customembed_wrap.col-lg-12
+                          button#customembed_btn.btn.btn-default.btn-block Custom Embed
+                          #customembed_entry
+                            | Paste the embed code below and hit Next or End.
+                            | Acceptable embed codes are <code>&lt;iframe&gt;</code> and <code>&lt;object&gt;</code> tags.
+                            textarea#customembed_code.input-block-level.form-control(rows="3")
+                        #extended_controls.col-lg-12
+                          button#clearplaylist.btn.btn-default.btn-block Clear Playlist
+                          button#shuffleplaylist.btn.btn-default.btn-block Shuffle Playlist
+              #voteskipwrap.col-lg-12.btn-group
+                button#voteskip.btn.btn-default Voteskip
+                button#getplaylist.btn.btn-default Get Playlist URLs
+                button#qlockbtn.btn.btn-danger(title="Playlist Locked")
+                  i.glyphicon.glyphicon-lock
+              .col-lg-12
+                #queue.videolist
+                #plmeta
+                  span#plclount 0 items
+                  span#pllength 00:00:00
+        #channelsettingswrap-outer.row
+          #channelsettingswrap-inner.col-lg-12
+            #channelsettingswrap.well
+        #resizewrap.row
+          .col-lg-5
+          #videowidth.col-lg-7
+
 
     script(src="js/jquery.js")
     script(src="js/bootstrap.js")
