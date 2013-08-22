@@ -7,7 +7,8 @@ html(lang="en")
     meta(name="author", content="Calvin 'calzoneman 'cyzon' Montgomery")
 
     link(href="css/bootstrap.css", rel="stylesheet")
-    link(href="css/navbar-footer.css", rel="stlyesheet")
+    link(href="css/navbar-footer.css", rel="stylesheet")
+    link(href="css/cytube.css", rel="stylesheet")
 
   body
     #wrap
@@ -48,28 +49,56 @@ html(lang="en")
           #leftpane.col-lg-5
             #leftpane-inner.row
               #pollbtnwrap.col-lg-12
-                button#newpollbtn.btn.btn-small.btn-default New Poll
+                button#newpollbtn.btn.btn-sm.btn-default New Poll
               #pollwrap.col-lg-12
               #searchwrap.col-lg-12
-                #searchpanel.panel.panel-default
+                #searchpanel-group.panel-group
+                  #searchpanel.panel.panel-default
+                    .panel-heading
+                      h4.panel-title
+                        a.accordion-toggle(data-toggle="collapse", data-parent="#searchpanel-group", href="#librarywrap") Library/YouTube Search
+                    #librarywrap.panel-body
+                      .row
+                        #querywrap.col-lg-6
+                          input#library_query.form-control(type="text")
+                        #searchbtns.col-lg-6.btn-group
+                          button#library_search.btn.btn-default Library
+                          button#youtube_search.btn.btn-default YouTube
+                      ul#library.videolist.col-lg-12
+              #playlistmanagerwrap.col-lg-12
+                #playlistmanagerpanel.panel.panel-default
                   .panel-heading
-                    a#librarytoggle(href="javascript:void(0)") Library/YouTube Search
-                  #librarywrap.panel-body
+                    a#userpltoggle(href="javascript:void(0)") Playlist Manager
+                  #userplaylistwrap.panel-body
                     .row
-                      #querywrap.col-lg-6
-                        input#library_query.form-control(type="text")
-                      #searchbtns.col-lg-6.btn-group
-                        button#library_search.btn.btn-default Library
-                        button#youtube_search.btn.btn-default YouTube
-                    ul#library.videolist.col-lg-12
-              #userpltogglewrap.panel.panel-default
-                .panel-heading
-                  a#userpltoggle(href="javascript:void(0)") Playlist Manager
-                #userplaylistwrap.panel-body
-                  .row
-                    .col-lg-7
-                      input#userpl_name.form-control(type="text", placeholder="Playlist Name")
+                      .col-lg-7
+                        input#userpl_name.form-control(type="text", placeholder="Playlist Name")
+                      .col-lg-5
+                        button#userpl_save.btn.btn-block.btn-default Save Playlist
+                      ul#userpl_list.col-lg-12
           #rightpane.col-lg-7
             #rightpane-inner.row
+              #qualitywrap.col-lg-12
+                .dropdown.btn-group
+                  button#qdrop.btn.btn-sm.btn-default.dropdown-toggle(data-toggle="dropdown") Quality
+                    b.caret
+                  mixin quality_item(id, text)
+                    li(role="presentation")
+                      a(id="#{id}", role="menuitem", href="javascript:void(0)") #{text}
+                  ul.dropdown-menu(role="menu", aria-labelledby="qdrop")
+                    +quality_item("quality_auto", "Quality: Auto")
+                    +quality_item("quality_240p", "240p")
+                    +quality_item("quality_360p", "240p")
+                    +quality_item("quality_480p", "240p")
+                    +quality_item("quality_720p", "240p")
+                    +quality_item("quality_1080p", "240p")
+                button#mediarefresh.btn.btn-sm.btn-default Refresh Media
+              #queue_align2
+              #plcontrolsouterwrap.col-lg-12
+                #plcontrolspanel.panel.panel-default
+                  .panel-heading
+                    a#playlisttoggle(href="javascript:void(0)") Show Playlist Controls
               
-          
+
+    script(src="js/jquery.js")
+    script(src="js/bootstrap.js")

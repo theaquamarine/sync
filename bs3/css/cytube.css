@@ -1,0 +1,34 @@
+#usercountwrap, #currenttitle {
+    border: 1px solid #aaaaaa;
+    border-bottom: none;
+    margin: 0;
+}
+
+#usercountwrap > p, #currenttitle > p {
+    margin: 0;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+#userlist, #messagebuffer {
+    height: 347px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 1px solid #aaaaaa;
+}
+
+#userlist {
+    float: left;
+    width: 150px;
+}
+
+#messagebuffer {
+    border-left: 0;
+}
+
+#ytapiplayer {
+    background-color: #000000;
+    height: 380px;
+}
