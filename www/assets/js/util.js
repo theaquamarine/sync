@@ -257,6 +257,14 @@ function addUserDropdown(entry, data) {
     entry.contextmenu(function(ev) {
         ev.preventDefault();
         if(menu.css("display") == "none") {
+            $(".user-dropdown").hide();
+            $(document).bind("mouseup.userlist-ddown", function (e) {
+                if (menu.has(e.target).length === 0 &&
+                    entry.parent().has(e.target).length === 0) {
+                    menu.hide();
+                    $(document).unbind("mouseup.userlist-ddown");
+                }
+            });
             menu.show();
         } else {
             menu.hide();
@@ -1707,4 +1715,25 @@ function unhidePlayer() {
 
     $("#ytapiplayer").attr("width", PLAYER.size.width)
         .attr("height", PLAYER.size.height);
+}
+
+function errDialog(err) {
+    var div = $("<div/>").addClass("profile-box")
+        .css("padding", "10px")
+        .text(err)
+        .appendTo($("body"));
+
+    $("<br/>").appendTo(div);
+    $("<button/>").addClass("btn btn-mini")
+        .css("width", "100%")
+        .text("OK")
+        .click(function () { div.remove(); })
+        .appendTo(div);
+    var cw = $("#chatwrap").width();
+    var ch = $("#chatwrap").height();
+    var cp = $("#chatwrap").offset();
+    var x = cp.left + cw/2 - div.width()/2;
+    var y = cp.top + ch/2 - div.height()/2;
+    div.css("left", x + "px");
+    div.css("top", y + "px");
 }

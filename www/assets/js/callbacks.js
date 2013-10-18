@@ -75,7 +75,7 @@ Callbacks = {
     },
 
     errorMsg: function(data) {
-        alert(data.msg);
+        errDialog(data.msg);
     },
 
     costanza: function (data) {
@@ -852,7 +852,7 @@ Callbacks = {
         }
         makeAlert("Error", text, "alert-error")
             .addClass("span12 qfalert")
-            .insertBefore($("#extended_controls"));
+            .appendTo($("#queuefail"));
     },
 
     setTemp: function(data) {
