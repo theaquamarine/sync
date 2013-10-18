@@ -2,6 +2,10 @@ html, body {
     height: 100%;
 }
 
+body {
+    background-color: #f5f5f5;
+}
+
 .wrapper {
     min-height: 100%;
     height: auto !important;
@@ -243,8 +247,21 @@ html, body {
     font-size: 14pt;
 }
 
+.option {
+    margin-top: 3px;
+}
+
 .option button {
     margin-right: 15px;
+}
+
+.option-selected {
+    font-weight: bold;
+}
+
+.option-selected button{
+    border-width: 3px!important;
+    margin-right: 10px;
 }
 
 .nick-highlight {
@@ -281,7 +298,7 @@ html, body {
 }
 
 #footer {
-    background-color: #f5f5f5;
+    background-color: #eeeeee;
     height: 30px;
     width: 100%;
     padding: 0;
@@ -338,4 +355,21 @@ html, body {
 
 #sc_volume .ui-slider-handle {
     border-color: rgb(255, 195, 0);
+}
+
+#ytapiplayer, #ytapiplayer > iframe {
+    border: none;
+}
+
+#adminflair {
+    margin-left: 3px;
+}
+
+#queuefail {
+    min-height: 0px;
+}
+
+#queuefail .alert {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

@@ -27,6 +27,7 @@ var YouTubePlayer = function (data) {
             removeOld();
             self.paused = false;
             self.videoId = data.id;
+            self.videoLength = data.seconds;
             var wmode = USEROPTS.wmode_transparent ? "transparent" : "opaque";
             self.player = new YT.Player("ytapiplayer", {
                 height: VHEIGHT,
@@ -66,9 +67,13 @@ var YouTubePlayer = function (data) {
     self.load = function (data) {
         if(self.player && self.player.loadVideoById) {
             self.player.loadVideoById(data.id, data.currentTime);
-            if(VIDEOQUALITY)
+            if(VIDEOQUALITY) {
                 self.player.setPlaybackQuality(VIDEOQUALITY);
+                // What's that?  Another stupid hack for the HTML5 player?
+                self.player.setPlaybackQuality(VIDEOQUALITY);
+            }
             self.videoId = data.id;
+            self.videoLength = data.seconds;
         }
     };
 
@@ -106,12 +111,14 @@ var VimeoPlayer = function (data) {
     var self = this;
     waitUntilDefined(window, "$f", function () {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init = function () {
             var iframe = $("<iframe/>");
             removeOld(iframe);
             iframe.attr("width", VWIDTH);
             iframe.attr("height", VHEIGHT);
-            iframe.attr("src", "http://player.vimeo.com/video/"+self.videoId+"?api=1&player_id=ytapiplayer");
+            var prto = location.protocol;
+            iframe.attr("src", prto+"//player.vimeo.com/video/"+self.videoId+"?api=1&player_id=ytapiplayer");
             iframe.attr("webkitAllowFullScreen", "");
             iframe.attr("mozallowfullscreen", "");
             iframe.attr("allowFullScreen", "");
@@ -147,6 +154,7 @@ var VimeoPlayer = function (data) {
 
         self.load = function (data) {
             self.videoId = data.id;
+            self.videoLength = data.seconds;
             self.init();
         };
 
@@ -183,9 +191,11 @@ var VimeoPlayer = function (data) {
 var VimeoFlashPlayer = function (data) {
     var self = this;
     self.videoId = data.id;
+    self.videoLength = data.seconds;
     self.init = function () {
         removeOld();
-        var url = "http://vimeo.com/moogaloop.swf?clip_id="+self.videoId;
+        var prto = location.protocol;
+        var url = prto+"//vimeo.com/moogaloop.swf?clip_id="+self.videoId;
         url += "&" + [
             "server=vimeo.com",
             "api=2",
@@ -242,6 +252,7 @@ var VimeoFlashPlayer = function (data) {
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init();
     };
 
@@ -277,6 +288,7 @@ var DailymotionPlayer = function (data) {
     waitUntilDefined(window, "DM", function () {
         removeOld();
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.player = DM.player("ytapiplayer", {
             video: data.id,
             width: parseInt(VWIDTH, 10),
@@ -307,6 +319,7 @@ var DailymotionPlayer = function (data) {
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         if(self.player && self.player.api)
             self.player.api("load", data.id);
     };
@@ -339,6 +352,7 @@ var DailymotionPlayer = function (data) {
 var SoundcloudPlayer = function (data) {
     var self = this;
     self.videoId = data.id;
+    self.videoLength = data.seconds;
     waitUntilDefined(window, "SC", function () {
         unfixSoundcloudShit();
         var iframe = $("<iframe/>");
@@ -387,6 +401,7 @@ var SoundcloudPlayer = function (data) {
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         if(self.player && self.player.load)
             self.player.load(data.id, { auto_play: true });
     };
@@ -426,11 +441,13 @@ var LivestreamPlayer = function (data) {
     removeOld();
     var self = this;
     self.videoId = data.id;
+    self.videoLength = data.seconds;
     self.init = function () {
         var flashvars = { channel: self.videoId };
         var params = { AllowScriptAccess: "always" };
+        var prto = location.protocol;
         swfobject.embedSWF(
-            "http://cdn.livestream.com/chromelessPlayer/v20/playerapi.swf",
+            prto+"//cdn.livestream.com/chromelessPlayer/v20/playerapi.swf",
             "ytapiplayer",
             VWIDTH, VHEIGHT,
             "9.0.0",
@@ -444,6 +461,7 @@ var LivestreamPlayer = function (data) {
 
     self.load = function(data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init();
     };
 
@@ -462,6 +480,7 @@ var TwitchTVPlayer = function (data) {
     removeOld();
     var self = this;
     self.videoId = data.id;
+    self.videoLength = data.seconds;
     self.init = function () {
         var url = "http://www.twitch.tv/widgets/live_embed_player.swf?channel="+self.videoId;
         var params = {
@@ -482,10 +501,13 @@ var TwitchTVPlayer = function (data) {
         );
     };
 
-    self.init();
+    waitUntilDefined(window, "swfobject", function () {
+        self.init();
+    });
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init();
     };
 
@@ -504,7 +526,9 @@ var JustinTVPlayer = function (data) {
     removeOld();
     var self = this;
     self.videoId = data.id;
+    self.videoLength = data.seconds;
     self.init = function () {
+        var prto = location.protocol;
         var url = "http://www.justin.tv/widgets/live_embed_player.swf?channel="+self.videoId;
         var params = {
             allowFullScreen: "true",
@@ -524,10 +548,13 @@ var JustinTVPlayer = function (data) {
         );
     };
 
-    self.init();
+    waitUntilDefined(window, "swfobject", function () {
+        self.init();
+    });
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init();
     };
 
@@ -546,15 +573,17 @@ var RTMPPlayer = function (data) {
     removeOld();
     var self = this;
     self.videoId = data.id;
+    self.videoLength = data.seconds;
     self.init = function () {
-        var url = "http://fpdownload.adobe.com/strobe/FlashMediaPlayback_101.swf";
+        var prto = location.protocol;
+        var url = prto+"//fpdownload.adobe.com/strobe/FlashMediaPlayback_101.swf";
         var src = encodeURIComponent(self.videoId);
         var params = {
             allowFullScreen: "true",
             allowScriptAccess: "always",
             allowNetworking: "all",
             wMode: "direct",
-            movie: "http://fpdownload.adobe.com/strobe/FlashMediaPlayback_101.swf",
+            movie: prto+"//fpdownload.adobe.com/strobe/FlashMediaPlayback_101.swf",
             flashvars: "src="+src+"&streamType=live&autoPlay=true"
         };
         swfobject.embedSWF(url,
@@ -567,10 +596,13 @@ var RTMPPlayer = function (data) {
         );
     };
 
-    self.init();
+    waitUntilDefined(window, "swfobject", function () {
+        self.init();
+    });
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init();
     };
 
@@ -588,6 +620,7 @@ var RTMPPlayer = function (data) {
 var JWPlayer = function (data) {
     var self = this;
     self.videoId = data.id;
+    self.videoLength = data.seconds;
     self.init = function () {
         removeOld();
 
@@ -617,6 +650,7 @@ var JWPlayer = function (data) {
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init();
     };
 
@@ -651,12 +685,14 @@ var JWPlayer = function (data) {
 var UstreamPlayer = function (data) {
     var self = this;
     self.videoId = data.id;
+    self.videoLength = data.seconds;
     self.init = function () {
         var iframe = $("<iframe/>");
         removeOld(iframe);
         iframe.attr("width", VWIDTH);
         iframe.attr("height", VHEIGHT);
-        iframe.attr("src", "http://www.ustream.tv/embed/"+self.videoId+"?v=3&wmode=direct");
+        var prto = location.protocol;
+        iframe.attr("src", prto+"//www.ustream.tv/embed/"+self.videoId+"?v=3&wmode=direct");
         iframe.attr("frameborder", "0");
         iframe.attr("scrolling", "no");
         iframe.css("border", "none");
@@ -666,6 +702,7 @@ var UstreamPlayer = function (data) {
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init();
     };
 
@@ -687,7 +724,8 @@ var ImgurPlayer = function (data) {
         removeOld(iframe);
         iframe.attr("width", VWIDTH);
         iframe.attr("height", VHEIGHT);
-        iframe.attr("src", "http://imgur.com/a/"+self.videoId+"/embed");
+        var prto = location.protocol;
+        iframe.attr("src", prto+"//imgur.com/a/"+self.videoId+"/embed");
         iframe.attr("frameborder", "0");
         iframe.attr("scrolling", "no");
         iframe.css("border", "none");
@@ -697,6 +735,7 @@ var ImgurPlayer = function (data) {
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init();
     };
 
@@ -714,6 +753,7 @@ var ImgurPlayer = function (data) {
 var CustomPlayer = function (data) {
     var self = this;
     self.videoId = data.id;
+    self.videoLength = data.seconds;
     self.init = function () {
         removeOld();
         var div = $("#ytapiplayer");
@@ -732,6 +772,7 @@ var CustomPlayer = function (data) {
 
     self.load = function (data) {
         self.videoId = data.id;
+        self.videoLength = data.seconds;
         self.init();
     };
 
@@ -747,12 +788,39 @@ var CustomPlayer = function (data) {
 };
 
 function handleMediaUpdate(data) {
+    // Don't update if the position is past the video length, but
+    // make an exception when the video length is 0 seconds
+    if (typeof PLAYER.videoLength === "number") {
+        if (PLAYER.videoLength > 0 && 
+            data.currentTime > PLAYER.videoLength) {
+            return;
+        }
+    }
+    var wait = data.currentTime < 0;
     // Media change
     if(data.id && data.id !== PLAYER.videoId) {
         if(data.currentTime < 0)
             data.currentTime = 0;
         PLAYER.load(data);
         PLAYER.play();
+    }
+
+    if (wait) {
+        var tm = 1;
+        /* Stupid hack -- In this thrilling episode of
+           "the YouTube API developers should eat a boat", the
+           HTML5 player apparently breaks if I play()-seek(0)-pause()
+           quickly (as a "start buffering but don't play yet"
+           mechanism)
+        */
+        if (PLAYER.type === "yt") {
+            tm = 500;
+        }
+        setTimeout(function () {
+            PLAYER.seek(0);
+            PLAYER.pause();
+        }, tm);
+        return;
     }
     
     // Don't synch if leader or synch disabled
@@ -761,8 +829,12 @@ function handleMediaUpdate(data) {
 
     // Handle pause/unpause
     if(data.paused) {
-        PLAYER.seek(data.currentTime);
-        PLAYER.pause();
+        PLAYER.isPaused(function (paused) {
+            if (!paused) {
+                PLAYER.seek(data.currentTime);
+                PLAYER.pause();
+            }
+        });
     } else {
         PLAYER.isPaused(function (paused) {
             if(paused)

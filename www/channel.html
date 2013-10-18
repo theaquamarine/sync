@@ -10,7 +10,7 @@
     <link href="./assets/css/bootstrap.css" rel="stylesheet">
     <link href="./assets/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="./assets/css/ytsync.css" rel="stylesheet" id="defaultcss">
-    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px;
@@ -48,9 +48,11 @@
       <div class="container" id="mainpage">
         <!-- top row (MOTD, drink count) -->
         <div class="row-fluid" id="toprow">
-          <div class="well span12" id="motd">
+          <div class="well" id="motdwrap">
+            <button class="close pull-right" id="togglemotd"><i class="icon-minus"></i></button>
+            <div id="motd"></div>
           </div>
-          <div class="span12" id="drinkbar">
+          <div id="drinkbar">
             <h1 id="drinkcount"></h1>
           </div>
         </div>
@@ -64,9 +66,11 @@
               <!-- chat container -->
               <div class="span5" id="chatwrap">
                 <!-- user count -->
-                <div id="usercountwrap" class="pointer">
-                  <i class="icon-chevron-up pull-left" id="userlisttoggle" title="Show/Hide Userlist"></i>
-                  <p id="usercount">Not connected</p>
+                <div id="usercountwrap">
+                  <i class="icon-chevron-up pull-left pointer" id="userlisttoggle" title="Show/Hide Userlist"></i>
+                  <span id="usercount" class="pointer">Not connected</span>
+                  <span id="adminflair" class="pull-right label label-default pointer" style="display: none">A</span>
+                  <span id="modflair" class="pull-right label label-default pointer" style="display: none">M</span>
                 </div>
                 <!-- userlist -->
                 <div id="userlist">
@@ -180,6 +184,7 @@
                         <div id="customembed_entry" style="display: none;">
                             Paste the embed code below and hit Next or End.  Acceptable embed codes are <code>&lt;iframe&gt;</code> and <code>&lt;object&gt;</code> tags.
                             <textarea rows="3" class="input-block-level" id="customembed_code"></textarea>
+                            <input type="text" class="input-block-level" id="customembed_title" placeholder="(Optional) Title">
                         </div>
                         <br>
                     </div>
@@ -195,6 +200,10 @@
                       <button class="btn btn-danger" style="width: 8%" id="qlockbtn" title="Playlist Locked">
                         <i class="icon-lock"></i>
                       </button>
+                  </div>
+                  <!-- queuefail area -->
+                  <div id="queuefail" class="span12">
+                    
                   </div>
                   <!-- video queue -->
                   <ul class="span12 videolist" id="queue">
@@ -229,14 +238,14 @@
   </div>
   <div id="footer">
     <p class="muted">
-    CyTube Software Copyright &copy; 2013 Calvin Montgomery&nbsp;&middot;&nbsp;Available for free on <a href="http://github.com/calzoneman/sync">GitHub</a>&nbsp;&middot;
+    CyTube Software Copyright &copy; 2013 Calvin Montgomery&nbsp;&middot;&nbsp;Available for free on <a href="https://github.com/calzoneman/sync">GitHub</a>&nbsp;&middot;
     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5Y7PUVVGVSEWG&lc=US&item_name=CyTube&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Donate</a>
     </p>
 
   </div>
 
   <script src="./assets/js/jquery.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   <!-- My Javascript -->
   <script src="./assets/js/data.js"></script>
   <script src="./assets/js/iourl.js"></script>
@@ -247,9 +256,9 @@
   <script src="./assets/js/ui.js"></script>
   <script src="./assets/js/callbacks.js"></script>
   <!-- APIs -->
-  <script defer src="http://www.youtube.com/iframe_api"></script>
-  <script defer src="http://api.dmcdn.net/all.js"></script>
-  <script defer src="http://jwpsrv.com/library/QouFCLBMEeKC+CIACpYGxA.js"></script>
+  <script defer src="//www.youtube.com/iframe_api"></script>
+  <script defer src="//api.dmcdn.net/all.js"></script>
+  <script defer src="./assets/js/jwplayer.js"></script>
   <script defer src="./assets/js/sc.js"></script>
   <script defer src="./assets/js/froogaloop.min.js"></script>
   <script defer src="./assets/js/swf.js"></script>
