@@ -7,6 +7,7 @@ html(lang="en")
     meta(name="author", content="Calvin 'calzoneman 'cyzon' Montgomery")
 
     link(href="css/bootstrap.css", rel="stylesheet")
+    link(href="css/bootstrap-theme.css", rel="stylesheet")
     link(href="css/navbar-footer.css", rel="stylesheet")
     link(href="css/cytube.css", rel="stylesheet")
 
@@ -38,9 +39,11 @@ html(lang="en")
         #announcements.row
         #main.row
           #chatwrap.col-lg-5
-            #usercountwrap.pointer
-              i#userlisttoggle.glyphicon.glyphicon-chevron-up.pull-left(title="Show/Hide Userlist")
-              p#usercount Not Connected
+            #usercountwrap
+              i#userlisttoggle.glyphicon.glyphicon-chevron-up.pull-left.pointer(title="Show/Hide Userlist")
+              span#usercount.pointer Not Connected
+              span#modflair.label.label-default.pull-right.pointer M
+              span#adminflair.label.label-default.pull-right.pointer A
             #userlist
             #messagebuffer
             input#chatline.form-control(type="text", maxlength="240")
@@ -101,6 +104,7 @@ html(lang="en")
                     +quality_item("quality_720p", "720p")
                     +quality_item("quality_1080p", "1080p")
                 button#mediarefresh.btn.btn-sm.btn-default Refresh Media
+              // electric boogaloo
               #queue_align2
               #plcontrolsouterwrap.col-lg-12
                 #plcontrols-group.panel-group
@@ -149,10 +153,16 @@ html(lang="en")
         #channelsettingswrap-outer.row
           #channelsettingswrap-inner.col-lg-12
             #channelsettingswrap.well
+              include modoptions.jade
         #resizewrap.row
           .col-lg-5
           #videowidth.col-lg-7
-
-
+        #sitefooter
+    #footer
+      .container
+        p.muted.credit.
+          CyTube Software Copyright &copy; 2013 Calvin Montgomery&nbsp;&middot;&nbsp;Available for free on <a href="http://github.com/calzoneman/sync">GitHub</a>&nbsp;&middot;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5Y7PUVVGVSEWG&lc=US&item_name=CyTube&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Donate</a>
     script(src="js/jquery.js")
     script(src="js/bootstrap.js")
+    script(src="js/respond.js")
+    script(src="js/iourl.js")

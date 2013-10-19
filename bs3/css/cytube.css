@@ -152,3 +152,12 @@
 .qe_clear {
     clear: both;
 }
+
+#usercountwrap .label {
+    height: 100%;
+    margin-left: 2px;
+}
+
+.well hr {
+    border-color: #cccccc;
+}

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Calvin 'calzoneman 'cyzon' Montgomery">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/navbar-footer.css" rel="stylesheet">
     <link href="css/cytube.css" rel="stylesheet">
   </head>
@@ -45,9 +46,7 @@
         <div id="announcements" class="row"></div>
         <div id="main" class="row">
           <div id="chatwrap" class="col-lg-5">
-            <div id="usercountwrap" class="pointer"><i id="userlisttoggle" title="Show/Hide Userlist" class="glyphicon glyphicon-chevron-up pull-left"></i>
-              <p id="usercount">Not Connected</p>
-            </div>
+            <div id="usercountwrap"><i id="userlisttoggle" title="Show/Hide Userlist" class="glyphicon glyphicon-chevron-up pull-left pointer"></i><span id="usercount" class="pointer">Not Connected</span><span id="modflair" class="label label-default pull-right pointer">M</span><span id="adminflair" class="label label-default pull-right pointer">A</span></div>
             <div id="userlist"></div>
             <div id="messagebuffer"></div>
             <input id="chatline" type="text" maxlength="240" class="form-control">
@@ -124,6 +123,7 @@
                 </div>
                 <button id="mediarefresh" class="btn btn-sm btn-default">Refresh Media</button>
               </div>
+              <!-- electric boogaloo-->
               <div id="queue_align2"></div>
               <div id="plcontrolsouterwrap" class="col-lg-12">
                 <div id="plcontrols-group" class="panel-group">
@@ -180,16 +180,142 @@
         </div>
         <div id="channelsettingswrap-outer" class="row">
           <div id="channelsettingswrap-inner" class="col-lg-12">
-            <div id="channelsettingswrap" class="well"></div>
+            <div id="channelsettingswrap" class="well">
+              <script src="js/modoptions.js"></script>
+              <button id="hide_settings" class="pull-right close">&times;</button>
+              <div class="dropup btn-group">
+                <button id="moddrop" data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">Moderator Settings<b class="caret"></b></button>
+                <ul role="menu" aria-labelledby="moddrop" class="dropdown-menu">
+                                  <li role="presentation" id="optedit_tab"><a id="show_optedit" role="menuitem" href="javascript:void(0)">Channel Options</a></li>
+                                  <li role="presentation" id="permedit_tab"><a id="show_permedit" role="menuitem" href="javascript:void(0)">Permissions</a></li>
+                                  <li role="presentation" id="motdedit_tab"><a id="show_motdedit" role="menuitem" href="javascript:void(0)">MOTD Editor</a></li>
+                                  <li role="presentation" id="filteredit_tab"><a id="show_filteredit" role="menuitem" href="javascript:void(0)">Chat Filters</a></li>
+                                  <li role="presentation" id="cssedit_tab"><a id="show_cssedit" role="menuitem" href="javascript:void(0)">CSS Editor</a></li>
+                                  <li role="presentation" id="jsedit_tab"><a id="show_jsedit" role="menuitem" href="javascript:void(0)">JS Editor</a></li>
+                                  <li role="presentation" id="banlist_tab"><a id="show_banlist" role="menuitem" href="javascript:void(0)">Ban List</a></li>
+                                  <li role="presentation" id="channelranks_tab"><a id="show_channelranks" role="menuitem" href="javascript:void(0)">Channel Ranks</a></li>
+                                  <li role="presentation" id="loginhistory_tab"><a id="show_loginhistory" role="menuitem" href="javascript:void(0)">Recent Connections</a></li>
+                                  <li role="presentation" id="chanlog_tab"><a id="show_chanlog" role="menuitem" href="javascript:void(0)">Channel Log</a></li>
+                </ul>
+              </div>
+              <hr>
+              <div id="optedit" class="col-lg-12">
+                <h3>Channel Options</h3>
+                <form role="form" action="javascript:void(0)" class="form-horizontal">
+                  <!-- Prevent chat flood-->
+                  <div class="form-group">
+                    <label for="opt_chat_antiflood" class="col-lg-3 control-label">Prevent Chat Flood</label>
+                    <div class="col-lg-3">
+                      <div class="checkbox">
+                        <input id="opt_chat_antiflood" type="checkbox">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- convert URLs to links-->
+                  <div class="form-group">
+                    <label for="opt_enable_link_regex" class="col-lg-3 control-label">Convert URLs in chat to links</label>
+                    <div class="col-lg-3">
+                      <div class="checkbox">
+                        <input id="opt_enable_link_regex" type="checkbox">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- voteskip toggle-->
+                  <div class="form-group">
+                    <label for="opt_allow_voteskip" class="col-lg-3 control-label">Allow Voteskip</label>
+                    <div class="col-lg-3">
+                      <div class="checkbox">
+                        <input id="opt_allow_voteskip" type="checkbox">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- voteskip ratio-->
+                  <div class="form-group">
+                    <label for="opt_voteskip_ratio" class="col-lg-3 control-label">Voteskip Ratio</label>
+                    <div class="col-lg-3">
+                      <input id="opt_voteskip_ratio" type="text" placeholder="0.5" class="form-control">
+                    </div>
+                  </div>
+                  <!-- max video length-->
+                  <div class="form-group">
+                    <label for="opt_maxlength" class="col-lg-3 control-label">Maximum Video Length</label>
+                    <div class="col-lg-3">
+                      <input id="opt_maxlength" type="text" placeholder="HH:MM:SS" class="form-control">
+                    </div>
+                  </div>
+                  <!-- auto afk-->
+                  <div class="form-group">
+                    <label for="opt_afktimeout" class="col-lg-3 control-label">Auto AFK Delay (0 to disable)</label>
+                    <div class="col-lg-3">
+                      <input id="opt_afktimeout" type="text" placeholder="0" class="form-control">
+                    </div>
+                  </div>
+                  <hr>
+                  <h3>Admin-Only Options</h3>
+                  <!-- page title-->
+                  <div class="form-group">
+                    <label for="opt_pagetitle" class="col-lg-3 control-label">Page Title</label>
+                    <div class="col-lg-3">
+                      <input id="opt_pagetitle" type="text" placeholder="CyTube" class="form-control">
+                    </div>
+                  </div>
+                  <!-- external css-->
+                  <div class="form-group">
+                    <label for="opt_externalcss" class="col-lg-3 control-label">External CSS</label>
+                    <div class="col-lg-3">
+                      <input id="opt_externalcss" type="text" placeholder="Stylesheet URL" class="form-control">
+                    </div>
+                  </div>
+                  <!-- external javascript-->
+                  <div class="form-group">
+                    <label for="opt_externaljs" class="col-lg-3 control-label">External JS</label>
+                    <div class="col-lg-3">
+                      <input id="opt_externaljs" type="text" placeholder="Script URL" class="form-control">
+                    </div>
+                  </div>
+                  <!-- show publicly-->
+                  <div class="form-group">
+                    <label for="opt_show_public" class="col-lg-3 control-label">List Channel Publicly</label>
+                    <div class="col-lg-3">
+                      <div class="checkbox">
+                        <input id="opt_show_public" type="checkbox">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- unregister-->
+                  <div class="form-group">
+                    <label for="chanopts_unregister" class="col-lg-3 control-label">Unregister Channel</label>
+                    <div class="col-lg-3">
+                      <button id="chanopts_unregister" class="btn btn-sm btn-danger">Drop Channel</button>
+                    </div>
+                  </div>
+                  <!-- submit-->
+                  <div class="form-group">
+                    <label for="chanopts_submit" class="col-lg-3 control-label">Save Changes</label>
+                    <div class="col-lg-3">
+                      <button id="chanopt_submit" class="btn btn-sm btn-primary">Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
         <div id="resizewrap" class="row">
           <div class="col-lg-5"></div>
           <div id="videowidth" class="col-lg-7"></div>
         </div>
+        <div id="sitefooter"></div>
+      </div>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">CyTube Software Copyright &copy; 2013 Calvin Montgomery&nbsp;&middot;&nbsp;Available for free on <a href="http://github.com/calzoneman/sync">GitHub</a>&nbsp;&middot;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5Y7PUVVGVSEWG&lc=US&item_name=CyTube&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Donate</a></p>
       </div>
     </div>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/respond.js"></script>
+    <script src="js/iourl.js"></script>
   </body>
 </html>

@@ -1,0 +1,91 @@
+script(src="js/modoptions.js")
+button#hide_settings.pull-right.close &times;
+.dropup.btn-group
+  button#moddrop.btn.btn-sm.btn-default.dropdown-toggle(data-toggle="dropdown") Moderator Settings
+    b.caret
+  mixin moditem(id, text)
+    li(role="presentation", id="#{id}_tab")
+      a(id="show_#{id}", role="menuitem", href="javascript:void(0)") #{text}
+  ul.dropdown-menu(role="menu", aria-labelledby="moddrop")
+    +moditem("optedit", "Channel Options")
+    +moditem("permedit", "Permissions")
+    +moditem("motdedit", "MOTD Editor")
+    +moditem("filteredit", "Chat Filters")
+    +moditem("cssedit", "CSS Editor")
+    +moditem("jsedit", "JS Editor")
+    +moditem("banlist", "Ban List")
+    +moditem("channelranks", "Channel Ranks")
+    +moditem("loginhistory", "Recent Connections")
+    +moditem("chanlog", "Channel Log")
+
+hr
+
+#optedit.col-lg-12
+  h3 Channel Options
+  form.form-horizontal(role="form", action="javascript:void(0)")
+    // Prevent chat flood
+    .form-group
+      label.col-lg-3.control-label(for="opt_chat_antiflood") Prevent Chat Flood
+      .col-lg-3
+        .checkbox
+          input#opt_chat_antiflood(type="checkbox")
+    // convert URLs to links
+    .form-group
+      label.col-lg-3.control-label(for="opt_enable_link_regex") Convert URLs in chat to links
+      .col-lg-3
+        .checkbox
+          input#opt_enable_link_regex(type="checkbox")
+    // voteskip toggle
+    .form-group
+      label.col-lg-3.control-label(for="opt_allow_voteskip") Allow Voteskip
+      .col-lg-3
+        .checkbox
+          input#opt_allow_voteskip(type="checkbox")
+    // voteskip ratio
+    .form-group
+      label.col-lg-3.control-label(for="opt_voteskip_ratio") Voteskip Ratio
+      .col-lg-3
+        input#opt_voteskip_ratio.form-control(type="text", placeholder="0.5")
+    // max video length
+    .form-group
+      label.col-lg-3.control-label(for="opt_maxlength") Maximum Video Length
+      .col-lg-3
+        input#opt_maxlength.form-control(type="text", placeholder="HH:MM:SS")
+    // auto afk
+    .form-group
+      label.col-lg-3.control-label(for="opt_afktimeout") Auto AFK Delay (0 to disable)
+      .col-lg-3
+        input#opt_afktimeout.form-control(type="text", placeholder="0")
+    hr
+    h3 Admin-Only Options
+    // page title
+    .form-group
+      label.col-lg-3.control-label(for="opt_pagetitle") Page Title
+      .col-lg-3
+        input#opt_pagetitle.form-control(type="text", placeholder="CyTube")
+    // external css
+    .form-group
+      label.col-lg-3.control-label(for="opt_externalcss") External CSS
+      .col-lg-3
+        input#opt_externalcss.form-control(type="text", placeholder="Stylesheet URL")
+    // external javascript
+    .form-group
+      label.col-lg-3.control-label(for="opt_externaljs") External JS
+      .col-lg-3
+        input#opt_externaljs.form-control(type="text", placeholder="Script URL")
+    // show publicly
+    .form-group
+      label.col-lg-3.control-label(for="opt_show_public") List Channel Publicly
+      .col-lg-3
+        .checkbox
+          input#opt_show_public(type="checkbox")
+    // unregister
+    .form-group
+      label.col-lg-3.control-label(for="chanopts_unregister") Unregister Channel
+      .col-lg-3
+        button#chanopts_unregister.btn.btn-sm.btn-danger Drop Channel
+    // submit
+    .form-group
+      label.col-lg-3.control-label(for="chanopts_submit") Save Changes
+      .col-lg-3
+          button#chanopt_submit.btn.btn-sm.btn-primary Save
