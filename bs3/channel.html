@@ -19,7 +19,7 @@
             <li><a href="https://github.com/calzoneman/sync/wiki/Beginner%27s-Guide-and-FAQ" target="_blank">Help</a></li>
             <li><a href="account.html">Account</a></li>
           </div>
-          <form id="loginform" class="navbar-form navbar-right">
+          <form id="loginform" action="javascript:void(0)" class="navbar-form navbar-right">
             <div class="form-group">
               <input id="guestname" type="text" placeholder="Name" class="form-control">
             </div>
@@ -37,8 +37,9 @@
             <div id="motd" class="well"></div>
           </div>
           <div id="drinkbarwrap" class="col-lg-12">
-            <div id="drinkbar"></div>
-            <h1 id="drinkcount"></h1>
+            <div id="drinkbar">
+              <h1 id="drinkcount"></h1>
+            </div>
           </div>
         </div>
         <div id="announcements" class="row"></div>
@@ -71,13 +72,14 @@
                     </div>
                     <div id="librarywrap" class="panel-body collapse">
                       <div class="row">
-                        <div id="querywrap" class="col-lg-6">
-                          <input id="library_query" type="text" class="form-control">
+                        <div id="querywrap" class="col-lg-12">
+                          <div class="input-group">
+                            <input id="library_query" type="text" class="form-control"><span class="input-group-btn">
+                              <button id="library_search" class="btn btn-default">Library</button></span><span class="input-group-btn">
+                              <button id="youtube_search" class="btn btn-default">YouTube</button></span>
+                          </div>
                         </div>
-                        <div id="searchbtns" class="col-lg-6 btn-group">
-                          <button id="library_search" class="btn btn-default">Library</button>
-                          <button id="youtube_search" class="btn btn-default">YouTube</button>
-                        </div>
+                        <!-- #searchbtns.col-lg-6.btn-group-->
                       </div>
                       <ul id="library" class="videolist col-lg-12"></ul>
                     </div>
@@ -92,11 +94,11 @@
                     </div>
                     <div id="userplaylistwrap" class="panel-body collapse">
                       <div class="row">
-                        <div class="col-lg-7">
-                          <input id="userpl_name" type="text" placeholder="Playlist Name" class="form-control">
-                        </div>
-                        <div class="col-lg-5">
-                          <button id="userpl_save" class="btn btn-block btn-default">Save Playlist</button>
+                        <div class="col-lg-12">
+                          <div class="input-group">
+                            <input id="userpl_name" type="text" placeholder="Playlist Name" class="form-control"><span class="input-group-btn">
+                              <button id="userpl_save" class="btn btn-default">Save</button></span>
+                          </div>
                         </div>
                         <ul id="userpl_list" class="col-lg-12"></ul>
                       </div>
@@ -114,10 +116,10 @@
                   <ul role="menu" aria-labelledby="qdrop" class="dropdown-menu">
                                       <li role="presentation"><a id="quality_auto" role="menuitem" href="javascript:void(0)">Quality: Auto</a></li>
                                       <li role="presentation"><a id="quality_240p" role="menuitem" href="javascript:void(0)">240p</a></li>
-                                      <li role="presentation"><a id="quality_360p" role="menuitem" href="javascript:void(0)">240p</a></li>
-                                      <li role="presentation"><a id="quality_480p" role="menuitem" href="javascript:void(0)">240p</a></li>
-                                      <li role="presentation"><a id="quality_720p" role="menuitem" href="javascript:void(0)">240p</a></li>
-                                      <li role="presentation"><a id="quality_1080p" role="menuitem" href="javascript:void(0)">240p</a></li>
+                                      <li role="presentation"><a id="quality_360p" role="menuitem" href="javascript:void(0)">360p</a></li>
+                                      <li role="presentation"><a id="quality_480p" role="menuitem" href="javascript:void(0)">480p</a></li>
+                                      <li role="presentation"><a id="quality_720p" role="menuitem" href="javascript:void(0)">720p</a></li>
+                                      <li role="presentation"><a id="quality_1080p" role="menuitem" href="javascript:void(0)">1080p</a></li>
                   </ul>
                 </div>
                 <button id="mediarefresh" class="btn btn-sm btn-default">Refresh Media</button>
@@ -131,19 +133,19 @@
                     </div>
                     <div id="playlist_controls" class="panel-body collapse">
                       <div class="row">
-                        <div class="col-lg-8">
-                          <input id="mediaurl" type="text" placeholder="Media URL" class="form-control input-block-level">
-                        </div>
-                        <div class="col-lg-4 btn-group">
-                          <button id="queue_next" class="btn btn-default">Next</button>
-                          <button id="queue_end" class="btn btn-default">At End</button>
+                        <div class="col-lg-12">
+                          <div class="input-group">
+                            <input id="mediaurl" type="text" placeholder="Media URL" class="form-control input-block-level"><span class="input-group-btn">
+                              <button id="queue_next" class="btn btn-default">Next</button></span><span class="input-group-btn">
+                              <button id="queue_end" class="btn btn-default">At End</button></span>
+                          </div>
                         </div>
                       </div>
                       <div class="row">
                         <div id="customembed_wrap" class="col-lg-12">
                           <button id="customembed_btn" class="btn btn-default btn-block">Custom Embed</button>
                           <div id="customembed_entry">
-                            Paste the embed code below and hit Next or End.
+                            Paste the embed code below and click Next or End.
                             Acceptable embed codes are <code>&lt;iframe&gt;</code> and <code>&lt;object&gt;</code> tags.
                             <textarea id="customembed_code" rows="3" class="input-block-level form-control"></textarea>
                           </div>
@@ -163,7 +165,14 @@
                 <button id="qlockbtn" title="Playlist Locked" class="btn btn-danger"><i class="glyphicon glyphicon-lock"></i></button>
               </div>
               <div class="col-lg-12">
-                <div id="queue" class="videolist"></div>
+                <div id="queue" class="videolist">
+                  <li class="queue_entry"><a href="#" class="qe_title">Derp</a><span class="qe_time">00:00</span>
+                    <div class="qe_clear"></div>
+                  </li>
+                  <li class="queue_entry queue_active queue_temp"><a href="#" class="qe_title">Derp</a><span class="qe_time">00:00</span>
+                    <div class="qe_clear"></div>
+                  </li>
+                </div>
                 <div id="plmeta"><span id="plclount">0 items</span><span id="pllength">00:00:00</span></div>
               </div>
             </div>
