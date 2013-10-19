@@ -75,7 +75,7 @@ Callbacks = {
     },
 
     errorMsg: function(data) {
-        alert(data.msg);
+        errDialog(data.msg);
     },
 
     costanza: function (data) {
@@ -136,13 +136,20 @@ Callbacks = {
             .click(function() { div.remove(); });
         $("<h3/>").text("This channel isn't registered").appendTo(div);
         $("<button/>").addClass("btn btn-primary").text("Register it")
+            .attr("id", "chanregisterbtn")
             .appendTo(div)
             .click(function() {
+                $(this).attr("disabled", true)
+                    .text("Registering...");
                 socket.emit("registerChannel");
             });
     },
 
     registerChannel: function(data) {
+        if ($("#chanregisterbtn").length > 0) {
+            $("#chanregisterbtn").text("Register it")
+                .attr("disabled", false);
+        }
         if(data.success) {
             $("#chregnotice").remove();
         }
@@ -166,10 +173,15 @@ Callbacks = {
         CHANNEL.motd_text = data.motd;
         $("#motd").html(data.html);
         $("#motdtext").val(CHANNEL.motd_text);
-        if(data.motd != "")
+        if(data.motd != "") {
+            $("#motdwrap").show();
             $("#motd").show();
+            $("#togglemotd").find(".icon-plus")
+                .removeClass("icon-plus")
+                .addClass("icon-minus");
+        }
         else
-            $("#motd").hide();
+            $("#motdwrap").hide();
     },
 
     chatFilters: function(entries) {
@@ -624,6 +636,7 @@ Callbacks = {
 
     /* REGION Chat */
     usercount: function(count) {
+        CHANNEL.usercount = count;
         var text = count + " connected user";
         if(count != 1) {
             text += "s";
@@ -652,6 +665,10 @@ Callbacks = {
     },
 
     addUser: function(data) {
+        var user = findUserlistItem(data.name);
+        // Remove previous instance of user, if there was one
+        if(user !== null)
+            user.remove();
         var div = $("<div/>")
             .addClass("userlist_item");
         var flair = $("<span/>").appendTo(div);
@@ -752,44 +769,90 @@ Callbacks = {
     },
 
     queue: function(data) {
-        queueAction({
-            fn: function () {
-                var li = makeQueueEntry(data.item, true);
-                li.hide();
-                var q = $("#queue");
-                li.attr("title", data.item.queueby
-                                    ? ("Added by: " + data.item.queueby)
-                                    : "Added by: Unknown");
-                if(data.after === "prepend") {
-                    li.prependTo(q);
-                    li.show("blind");
-                    return true;
+        PL_ACTION_QUEUE.queue(function (plq) {
+            var li = makeQueueEntry(data.item, true);
+            if (data.item.uid === PL_CURRENT)
+                li.addClass("queue_active");
+            li.hide();
+            var q = $("#queue");
+            li.attr("title", data.item.queueby
+                                ? ("Added by: " + data.item.queueby)
+                                : "Added by: Unknown");
+            if (data.after === "prepend") {
+                li.prependTo(q);
+                li.show("blind", function () {
+                    plq.release();
+                });
+            } else if (data.after === "append") {
+                li.appendTo(q);
+                li.show("blind", function () {
+                    plq.release();
+                });
+            } else {
+                var liafter = playlistFind(data.after);
+                if (!liafter) {
+                    plq.release();
+                    return;
                 }
-                else if(data.after === "append") {
-                    li.appendTo(q);
-                    li.show("blind");
-                    return true;
-                }
-                else {
-                    var liafter = playlistFind(data.after);
-                    if(!liafter) {
-                        return false;
-                    }
-                    li.insertAfter(liafter);
-                    li.show("blind");
-                    return true;
-                }
+                li.insertAfter(liafter);
+                li.show("blind", function () {
+                    plq.release();
+                });
             }
         });
     },
 
-    queueFail: function(data) {
-        if(!data) {
-            data = "Queue failed.  Check your link to make sure it is valid.";
+    queueFail: function (data) {
+        if (!data)
+            data = { link: null };
+        if (!data.msg || data.msg === true) {
+            data.msg = "Queue failed.  Check your link to make sure it is valid.";
         }
-        makeAlert("Error", data, "alert-error")
-            .addClass("span12")
-            .insertBefore($("#extended_controls"));
+        var alerts = $(".qfalert");
+        for (var i = 0; i < alerts.length; i++) {
+            var al = $(alerts[i]);
+            var cl = al.clone();
+            cl.children().remove();
+            if (cl.text() === data.msg) {
+                var tag = al.find(".label-important");
+                if (tag.length > 0) {
+                    var morelinks = al.find(".qflinks");
+                    $("<a/>").attr("href", data.link)
+                        .attr("target", "_blank")
+                        .text(data.link)
+                        .appendTo(morelinks);
+                    $("<br/>").appendTo(morelinks);
+                    var count = parseInt(tag.text().match(/\d+/)[0]) + 1;
+                    tag.text(tag.text().replace(/\d+/, ""+count));
+                } else {
+                    var tag = $("<span/>")
+                        .addClass("label label-important pull-right pointer")
+                        .text("+ 1 more")
+                        .appendTo(al);
+                    var morelinks = $("<div/>")
+                        .addClass("qflinks")
+                        .appendTo(al)
+                        .hide();
+                    $("<a/>").attr("href", data.link)
+                        .attr("target", "_blank")
+                        .text(data.link)
+                        .appendTo(morelinks);
+                    $("<br/>").appendTo(morelinks);
+                    tag.click(function () {
+                        morelinks.toggle();
+                    });
+                }
+                return;
+            }
+        }
+        var text = data.msg;
+        if (typeof data.link === "string") {
+            text += "<br><a href='" + data.link + "' target='_blank'>" +
+                    data.link + "</a>";
+        }
+        makeAlert("Error", text, "alert-error")
+            .addClass("span12 qfalert")
+            .appendTo($("#queuefail"));
     },
 
     setTemp: function(data) {
@@ -817,52 +880,38 @@ Callbacks = {
     },
 
     "delete": function(data) {
-        queueAction({
-            fn: function () {
-                PL_WAIT_SCROLL = true;
-                var li = $(".pluid-" + data.uid);
-                li.hide("blind", function() {
-                    li.remove();
-                    PL_WAIT_SCROLL = false;
-                });
-                return true;
-            }
+        PL_ACTION_QUEUE.queue(function (plq) {
+            PL_WAIT_SCROLL = true;
+            var li = $(".pluid-" + data.uid);
+            li.hide("blind", function() {
+                li.remove();
+                plq.release();
+                PL_WAIT_SCROLL = false;
+            });
         });
     },
 
     moveVideo: function(data) {
-        if(data.moveby != CLIENT.name) {
-            queueAction({
-                fn: function () {
-                    playlistMove(data.from, data.after);
-                    return true;
-                }
+        PL_ACTION_QUEUE.queue(function (plq) {
+            playlistMove(data.from, data.after, function () {
+                plq.release();
             });
-        }
+        });
     },
 
     setCurrent: function(uid) {
-        queueAction({
-            fn: function () {
-                PL_CURRENT = uid;
-                var qli = $("#queue li");
-                qli.removeClass("queue_active");
-                var li = $(".pluid-" + uid);
-                if(li.length == 0) {
-                    return false;
+        PL_CURRENT = uid;
+        $("#queue li").removeClass("queue_active");
+        var li = $(".pluid-" + uid);
+        if (li.length !== 0) {
+            li.addClass("queue_active");
+            var tmr = setInterval(function () {
+                if (!PL_WAIT_SCROLL) {
+                    scrollQueue();
+                    clearInterval(tmr);
                 }
-
-                li.addClass("queue_active");
-                var timer = setInterval(function () {
-                    if(!PL_WAIT_SCROLL) {
-                        scrollQueue();
-                        clearInterval(timer);
-                    }
-                }, 100);
-                return true;
-            },
-            can_wait: true
-        });
+            }, 100);
+        }
     },
 
     changeMedia: function(data) {
@@ -927,38 +976,29 @@ Callbacks = {
                 clearSearchResults();
             })
             .insertBefore($("#library"));
-        var p = $("#library").data("paginator");
-        if(p) {
-            p.items = data.results;
-            p.loadPage(0);
-        }
-        else {
-            var opts = {
-                preLoadPage: function () {
-                    $("#library").html("");
-                },
 
-                generator: function (item, page, index) {
-                    var li = makeSearchEntry(item, false);
-                    if(hasPermission("playlistadd")) {
-                        if(item.thumb) {
-                            addLibraryButtons(li, item.id, "yt");
-                        }
-                        else {
-                            addLibraryButtons(li, item.id);
-                        }
-                    }
-                    $(li).appendTo($("#library"));
-                },
 
-                itemsPerPage: 100
-            };
+        $("#search_pagination").remove();
+        var opts = {
+            preLoadPage: function () {
+                $("#library").html("");
+            },
 
-            p = Paginate(data.results, opts);
-            p.paginator.insertBefore($("#library"))
-                .attr("id", "search_pagination");
-            $("#library").data("paginator", p);
-        }
+            generator: function (item, page, index) {
+                var li = makeSearchEntry(item, false);
+                if(hasPermission("playlistadd")) {
+                    addLibraryButtons(li, item.id, data.source);
+                }
+                $(li).appendTo($("#library"));
+            },
+
+            itemsPerPage: 100
+        };
+
+        var p = Paginate(data.results, opts);
+        p.paginator.insertBefore($("#library"))
+            .attr("id", "search_pagination");
+        $("#library").data("paginator", p);
     },
 
     /* REGION Polls */
@@ -984,13 +1024,14 @@ Callbacks = {
         $("<h3/>").text(data.title).appendTo(poll);
         for(var i = 0; i < data.options.length; i++) {
             (function(i) {
-            var callback = function() {
-                    socket.emit("vote", {
-                        option: i
-                    });
-                    poll.find(".option button").each(function() {
-                        $(this).attr("disabled", "disabled");
-                    });
+            var callback = function () {
+                socket.emit("vote", {
+                    option: i
+                });
+                poll.find(".option button").each(function() {
+                    $(this).attr("disabled", "disabled");
+                });
+                $(this).parent().addClass("option-selected");
             }
             $("<button/>").addClass("btn").text(data.counts[i])
                 .prependTo($("<div/>").addClass("option").text(data.options[i])
@@ -1007,7 +1048,7 @@ Callbacks = {
         var poll = $("#pollwrap .active");
         var i = 0;
         poll.find(".option button").each(function() {
-            $(this).text(data.counts[i]);
+            $(this).html(data.counts[i]);
             i++;
         });
     },
@@ -1136,6 +1177,9 @@ $.getScript(IO_URL+"/socket.io/socket.io.js", function() {
             if(i >= 0)
                 io.transports.splice(i, 1);
         }
+        var opts = {};
+        if (location.protocol === "https:")
+            opts.secure = true;
         socket = io.connect(IO_URL);
         setupCallbacks();
     }

@@ -9,7 +9,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-var CL_VERSION = "2.0.0";
+var CL_VERSION = "2.4.3";
 
 var CLIENT = {
     rank: -1,
@@ -31,7 +31,8 @@ var CHANNEL = {
     js: "",
     motd: "",
     motd_text: "",
-    name: false
+    name: false,
+    usercount: 0
 };
 
 var PLAYER = false;
@@ -43,10 +44,6 @@ if($("#videowidth").length > 0) {
     VWIDTH = $("#videowidth").css("width").replace("px", "");
     VHEIGHT = ""+parseInt(parseInt(VWIDTH) * 9 / 16);
 }
-var MEDIA = { hash: "" };
-var PL_MOVING = false;
-var PL_ADDING = false;
-var PL_DELETING = false;
 var REBUILDING = false;
 var socket = {
     emit: function() {
@@ -63,12 +60,14 @@ var LASTCHATTIME = 0;
 var FOCUSED = true;
 var PAGETITLE = "CyTube";
 var TITLE_BLINK;
+var CHATSOUND = new Audio("assets/sounds/boop.wav");
 var KICKED = false;
 var NAME = readCookie("cytube_uname");
 var SESSION = readCookie("cytube_session");
 var LEADTMR = false;
 var PL_FROM = "";
 var PL_AFTER = "";
+var PL_CURRENT = -1;
 var PL_WAIT_SCROLL = false;
 var FILTER_FROM = 0;
 var FILTER_TO = 0;
@@ -118,7 +117,9 @@ var USEROPTS = {
     ignore_channeljs     : getOrDefault("ignore_channeljs", false),
     sort_rank            : getOrDefault("sort_rank", false),
     sort_afk             : getOrDefault("sort_afk", false),
-    default_quality      : getOrDefault("default_quality", "#quality_auto")
+    default_quality      : getOrDefault("default_quality", "#quality_auto"),
+    boop                 : getOrDefault("boop", false),
+    secure_connection    : getOrDefault("secure_connection", false)
 };
 
 var NO_WEBSOCKETS = USEROPTS.altsocket;

@@ -7,9 +7,8 @@ calzoneman/sync
 About
 -----
 
-CyTube (formerly Sync) is a server/client combination providing media synchronization, chat,
-and administration for an arbitrary number of channels.
-I began developing this as a hobby project, and when Synchtube announced their closure, I
+CyTube is a web application providing media synchronization, chat, and more for an arbitrary number of channels.
+I began developing this as a hobby project, and when synchtube.com announced their closure, I
 began polishing it and readying it for the public.
 
 I am hosting a CyTube server at http://cytu.be
@@ -22,46 +21,68 @@ The clientside is written in JavaScript and makes use of Socket.IO and
 jQuery as well as the APIs for various media providers.
 The web interface uses Bootstrap for layout and styling.
 
-The following media sources are currently supported:
-- YouTube (individual videos)
-- YouTube Playlists
-- Vimeo
-- Dailymotion
-- Soundcloud
-- Livestream.com
-- Twitch.tv
-- Justin.tv
-- Ustream
-- RTMP livestreams
+Features
+--------
+- Standalone web/socket.io server
+- Optional SSL support for socket.io and the account API
+- Synchronized playback from the following sources:
+  - YouTube (individual videos + playlists)
+  - Vimeo
+  - Dailymotion
+  - Soundcloud
+  - Raw video/audio files (via JWPlayer)
+- Embedding of the following sources:
+  - livestream.com
+  - twitch.tv
+  - justin.tv
+  - ustream.tv
+  - RTMP streams
+  - Icecast (via JWPlayer)
+  - Custom `<iframe>` and `<object>` embeds
+- Channel customization
+  - HTML Message of the Day
+  - CSS
+  - JavaScript
+  - Permissions
+    - Tiered ranks (Site admin > Channel admin > Moderator > Leader > Member > Guest > Anonymous)
+  - Chat filters (based on regular expressions)
+  - Lock/unlock playlist to allow additions by non-moderators (configurable with permissions)
+  - Searchable library of videos
+- Integrated YouTube search
+- Save/load playlists per user account
+- Polls
+- Voteskip (can be disabled by a channel moderator)
+- Auto-AFK status (can be configured per-channel)
+- Leader
+  - Grants control of playback to a user (can pause/seek)
+  - Can also be used to grant temporary mod-like powers to a user
+  - Not necessary for synchronization as the server has an internal timer
+- Channel state saves/loads on restart
+- Account management
+  - Password change
+  - Password reset (via email)
+  - Profile avatar and text
+- Moderation
+  - Mute users
+  - Kick users
+  - Ban users by name
+  - Ban users by IP address (and by /24 range)
+- Administration
+  - Log viewer
+  - Global bans
+  - Search registered channels and users
+  - Currently loaded channels
+  - Stats (usercount, channelcount, RAM usage)
 
 Installing
 ----------
 
-Installation instructions for specific distributions are available here: https://github.com/calzoneman/sync/wiki/Installing
-
-This assumes you have Node.JS installed.
-I'm using v0.10, please feel free to report which versions do/do not work.
-I recommend using at least v0.8.20 due to a bug in previous versions of node
-that caused sketchy client connections to crash the server.
-
-First install MySQL on the server.  There are many online tutorials for setting up MySQL on
-various operating systems.
-I recommend installing phpMyAdmin so that you have a nice database administration interface.
-Create a new user and database, and make sure the user has full permissions for the database.
-
-Then, follow these instructions to install CyTube:
-
-1. Clone this repository (`git clone https://github.com/calzoneman/sync`)
-2. cd to the directory containing the source files
-3. Install your distribution's `libmysqlclient` package.
-3. Install dependencies: `npm install`
-4. Edit `config.js` and input your database details and connection port.  Optionally, configure an SMTP transport to use for sending password reset emails (see https://github.com/andris9/Nodemailer).
-5. Edit `www/assets/js/iourl.js` and change the value of `IO_URL` to `yourhostname:port` where `port` is the port defined in `config.js`.  Also change `WEB_URL` to `yourhostname:web_port` where `web_port` is the websocket port you defined in `config.js`
+Installation instructions are available here: https://github.com/calzoneman/sync/wiki/Installing
 
 Running
 -------
 
-Start the server: `node server.js`
+Start the server: `node index.js`
 You should now be able to connect via `yourhostname:port` where `port` is
 the port you defined in config.js
 

@@ -9,24 +9,20 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-var Logger = require("./logger");
+var Server = require("./lib/server");
+var Config = require("./lib/config");
+var Logger = require("./lib/logger");
 
-const STAT_INTERVAL = 60 * 60 * 1000;
-const STAT_EXPIRE = 24 * STAT_INTERVAL;
-
-module.exports = function (Server) {
-    var db = Server.db;
-    setInterval(function () {
-        var chancount = Server.channels.length;
-        var usercount = 0;
-        Server.channels.forEach(function (chan) {
-            usercount += chan.users.length;
+Config.load("cfg.json", function (cfg) {
+    var sv = Server.init(cfg);
+    if(!cfg["debug"]) {
+        process.on("uncaughtException", function (err) {
+            Logger.errlog.log("[SEVERE] Uncaught Exception: " + err);
+            Logger.errlog.log(err.stack);
         });
 
-        var mem = process.memoryUsage().rss;
-
-        db.addStatPoint(Date.now(), usercount, chancount, mem, function () {
-            db.pruneStats(Date.now() - STAT_EXPIRE);
+        process.on("SIGINT", function () {
+            sv.shutdown();
         });
-    }, STAT_INTERVAL);
-}
+    }
+});
