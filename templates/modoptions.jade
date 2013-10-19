@@ -89,3 +89,49 @@ hr
       label.col-lg-3.control-label(for="chanopts_submit") Save Changes
       .col-lg-3
           button#chanopt_submit.btn.btn-sm.btn-primary Save
+
+#permedit.col-lg-12
+
+#filteredit.col-lg-12
+  h3 Chat Filters
+  p.
+    Filters will be processed in the order that they are listed here.
+    Click and drag a row to rearrange the order.  Click a regex, flags, or
+    replacement field to edit a filter inline.
+  strong Add Filter
+  form.form-horizontal(role="form", action="javascript:void(0)")
+    .form-group
+      label.col-lg-3.control-label(for="newfilter_name") Name
+      .col-lg-3
+        input#newfilter_name.form-control(type="text")
+    .form-group
+      label.col-lg-3.control-label(for="newfilter_regex") Regular Expression
+      .col-lg-3
+        input#newfilter_regex.form-control(type="text")
+    .form-group
+      label.col-lg-3.control-label(for="newfilter_flags") Flags
+      .col-lg-3
+        input#newfilter_flags.form-control(type="text", placeholder="g")
+    .form-group
+      label.col-lg-3.control-label(for="newfilter_replace") Replacement
+      .col-lg-3
+        input#newfilter_replace.form-control(type="text")
+    .form-group
+      label.col-lg-3.control-label(for="newfilter_filterlinks") Filter Links
+      .col-lg-3
+        .checkbox
+          input#newfilter_filterlinks(type="checkbox")
+    .form-group
+      label.col-lg-3.control-label(for="newfilter_submit") Create Filter
+      .col-lg-3
+        button#newfilter_submit.btn.btn-sm.btn-primary Create
+  table.table.table-striped.table-condensed
+    thead
+      tr
+        th Delete
+        th Name
+        th Regex
+        th Flags
+        th Replacement
+        th Affects Links
+        th Active
