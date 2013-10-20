@@ -515,8 +515,12 @@ function rebuildPlaylist() {
 /* user settings menu */
 function showOptionsMenu() {
     hidePlayer();
-    var modal = $("<div/>").addClass("modal hide fade")
+    var outer = $("<div/>").addClass("modal fade")
         .appendTo($("body"));
+    var dlg = $("<div/>").addClass("modal-dialog")
+        .appendTo(outer);
+    var modal = $("<div/>").addClass("modal-content")
+        .appendTo(dlg);
 
     modal.load("useroptions.html", function () {
         if (CLIENT.rank < 2) {
@@ -734,17 +738,17 @@ function showOptionsMenu() {
                 USEROPTS.joinmessage = mod_joinmsg.prop("checked");
             }
             saveOpts();
-            modal.modal("hide");
+            outer.modal("hide");
         });
     });
 
-    modal.on("hidden", function () {
+    outer.on("hidden", function () {
         unhidePlayer();
         applyOpts();
-        modal.remove();
+        outer.remove();
     });
 
-    modal.modal();
+    outer.modal({ backdrop: false });
 }
 
 function saveOpts() {
