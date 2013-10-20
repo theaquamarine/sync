@@ -96,14 +96,14 @@ $("#modflair").click(function () {
 
 $("#adminflair").click(function () {
     var m = $("#adminflair");
-    if (m.hasClass("label-important")) {
+    if (m.hasClass("label-danger")) {
         USEROPTS.adminhat = false;
-        m.removeClass("label-important")
+        m.removeClass("label-danger")
          .addClass("label-default");
     } else {
         USEROPTS.adminhat = true;
         m.removeClass("label-default")
-         .addClass("label-important");
+         .addClass("label-danger");
     }
 });
 
@@ -243,7 +243,7 @@ $("#youtube_search").click(function () {
                   "in the 'Media URL' box under Playlist Controls.  This "+
                   "searchbar works like YouTube's search function.",
                   "alert-error")
-            .addClass("span12")
+            .addClass("col-lg-12")
             .insertBefore($("#library"));
     }
 
@@ -262,7 +262,7 @@ $("#userpltoggle").click(function() {
 $("#userpl_save").click(function() {
     if($("#userpl_name").val().trim() == "") {
         makeAlert("Invalid Name", "Playlist name cannot be empty", "alert-error")
-            .addClass("span12")
+            .addClass("col-lg-12")
             .insertAfter($("#userpl_save").parent());
         return;
     }
@@ -348,7 +348,7 @@ function queue(pos) {
         var data = parseMediaLink(link);
         if(data.id === null || data.type === null) {
             makeAlert("Error", "Invalid link.  Please double check it and remove extraneous information", "alert-error")
-                .addClass("span12")
+                .addClass("col-lg-12")
                 .insertBefore($("#extended_controls"));
         }
         else {
@@ -416,9 +416,11 @@ $("#getplaylist").click(function() {
             list.push(entry);
         }
         var urls = list.join(",");
-
-        var modal = $("<div/>").addClass("modal hide fade")
+        var outer = $("<div/>").addClass("modal fade")
+            .attr("role", "dialog")
             .appendTo($("body"));
+        var dlg = $("<div/>").addClass("modal-dialog").appendTo(outer);
+        var modal = $("<div/>").addClass("modal-content").appendTo(dlg);
         var head = $("<div/>").addClass("modal-header")
             .appendTo(modal);
         $("<button/>").addClass("close")
@@ -426,17 +428,19 @@ $("#getplaylist").click(function() {
             .attr("aria-hidden", "true")
             .html("&times;")
             .appendTo(head);
-        $("<h3/>").text("Playlist URLs").appendTo(head);
+        $("<h4/>").addClass("modal-title").text("Playlist URLs")
+            .appendTo(head);
         var body = $("<div/>").addClass("modal-body").appendTo(modal);
         $("<input/>").attr("type", "text")
+            .addClass("form-control")
             .val(urls)
             .appendTo(body);
         $("<div/>").addClass("modal-footer").appendTo(modal);
-        modal.on("hidden", function() {
-            modal.remove();
+        outer.on("hidden", function() {
+            outer.remove();
             unhidePlayer();
         });
-        modal.modal();
+        outer.modal({ backdrop: false });
     }
     socket.on("playlist", callback);
     socket.emit("requestPlaylist");
@@ -479,7 +483,7 @@ else {
     var main = $("#main");
     var container = $("<div/>").addClass("container").insertBefore(main);
     var row = $("<div/>").addClass("row").appendTo(container);
-    var div = $("<div/>").addClass("span6").appendTo(row);
+    var div = $("<div/>").addClass("col-lg-6").appendTo(row);
     main.css("display", "none");
     var label = $("<label/>").text("Enter Channel:").appendTo(div);
     var entry = $("<input/>").attr("type", "text").appendTo(div);
