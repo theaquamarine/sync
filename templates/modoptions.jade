@@ -9,8 +9,8 @@ button#hide_settings.pull-right.close &times;
   ul.dropdown-menu(role="menu", aria-labelledby="moddrop")
     +moditem("optedit", "Channel Options")
     +moditem("permedit", "Permissions")
-    +moditem("motdedit", "MOTD Editor")
     +moditem("filteredit", "Chat Filters")
+    +moditem("motdedit", "MOTD Editor")
     +moditem("cssedit", "CSS Editor")
     +moditem("jsedit", "JS Editor")
     +moditem("banlist", "Ban List")
@@ -135,3 +135,78 @@ hr
         th Replacement
         th Affects Links
         th Active
+  p.
+    Multi-Filter Editor (format: name regex flags replacement).
+    Only use this if you know what you are doing.
+  form.form-horizontal(role="form", action="javascript:void(0)")
+    .form-group.col-lg-12
+      textarea#multifiltereditor.form-control(rows="10")
+    .form-group.col-lg-12
+      button#multifiltersubmit.btn.btn-sm.btn-primary Add/Update
+
+#motdedit.col-lg-12
+  h2 MOTD Editor
+  p.
+    Enter HTML below to be displayed in the MOTD box above the chat/video.
+    Only basic HTML is allowed; tags and attributes which execute
+    Javascript will be stripped out.
+  form.form-horizontal(role="form", action="javascript:void(0)")
+    .form-group.col-lg-12
+      textarea#motdtext.form-control(rows="10")
+    .form-group.col-lg-12
+      button#save_motd.btn.btn-sm.btn-primary Save
+
+#cssedit.col-lg-12
+  h2 CSS Editor
+  p.
+    Maximum size 20KB.  If you need more space, host the file externally and
+    use the External CSS option
+  form.form-horizontal(role="form", action="javascript:void(0)")
+    .form-group.col-lg-12
+      textarea#csstext.form-control(rows="10")
+    .form-group.col-lg-12
+      button#save_css.btn.btn-sm.btn-primary Save
+
+#jsedit.col-lg-12
+  h2 Javascript Editor
+  p.
+    Maximum size 20KB.  If you need more space, host the file externally and
+    use the External JS option
+  form.form-horizontal(role="form", action="javascript:void(0)")
+    .form-group.col-lg-12
+      textarea#jstext.form-control(rows="10")
+    .form-group.col-lg-12
+      button#save_js.btn.btn-sm.btn-primary Save
+
+#banlist.col-lg-12
+  h2 Ban List
+  table.table.table-striped
+    thead
+      tr
+        th Unban
+        th IP
+        th Name
+        th Aliases
+        th Banned By
+
+#loginhistory.col-lg-12
+  h2 Recent Connections
+  table.table.table-striped
+    thead
+      tr
+        th Name
+        th Aliases
+        th Time
+
+#channelranks.col-lg-12
+  h2 Channel Ranks
+  table.table.table-striped
+    thead
+      tr
+        th Name
+        th Rank (click to edit)
+
+#chanlog.col-lg-12
+  h2 Channel Log
+  button#chanlog_refresh.btn.btn-sm.btn-default Refresh
+  pre#chanlog_contents

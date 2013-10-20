@@ -15,7 +15,8 @@ function read(fn, callback) {
 
 var files = [
     'templates/index.jade',
-    'templates/channel.jade'
+    'templates/channel.jade',
+    'templates/modoptions.jade'
 ];
 
 var locals = {
