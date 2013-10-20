@@ -103,10 +103,6 @@
     border: 1px solid #aaaaaa;
 }
 
-#plcount {
-    float: left;
-}
-
 #pllength {
     float: right;
 }
@@ -299,5 +295,23 @@
 }
 
 #togglemotd .glyphicon {
-    font-size: 12pt;
+    font-size: 10pt;
+}
+
+.poll-menu > .btn, .poll-menu > input {
+    clear: both;
+    margin-bottom: 10px;
+}
+
+.option > .btn {
+    margin-right: 8px;
+}
+
+.option.option-selected > .btn {
+    border-width: 3px;
+    margin-right: 5px;
+}
+
+#search_clear {
+    margin-top: 10px;
 }

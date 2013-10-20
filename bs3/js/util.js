@@ -571,14 +571,19 @@ function showOptionsMenu() {
 
         var gen_theme = $("<select/>").addClass("form-control");
         $("<option/>").attr("value", "default")
-            .text("Default")
+            .text("Bootstrap")
             .appendTo(gen_theme);
+        $("<option/>").attr("value", "template")
+            .text("Template")
+            .appendTo(gen_theme);
+        /*
         $("<option/>").attr("value", "assets/css/darkstrap.css")
             .text("Dark")
             .appendTo(gen_theme);
         $("<option/>").attr("value", "assets/css/altdark.css")
             .text("Alternate Dark")
             .appendTo(gen_theme);
+        */
         gen_theme.val(USEROPTS.theme);
         addOption(general, "Theme", gen_theme);
 
@@ -763,11 +768,14 @@ function saveOpts() {
 
 function applyOpts() {
     $("#usertheme").remove();
-    if(USEROPTS.theme != "default") {
+    if(USEROPTS.theme !== "template") {
+        var thm = USEROPTS.theme;
+        if (USEROPTS.theme === "default")
+            thm = "css/bootstrap-theme.min.css";
         $("<link/>").attr("rel", "stylesheet")
             .attr("type", "text/css")
             .attr("id", "usertheme")
-            .attr("href", USEROPTS.theme)
+            .attr("href", thm)
             .appendTo($("head"));
     }
 
@@ -921,33 +929,27 @@ function showPollMenu() {
         });
 
     $("<strong/>").text("Title").appendTo(menu);
-    $("<br/>").appendTo(menu);
 
     var title = $("<input/>").attr("type", "text")
         .addClass("form-control")
         .appendTo(menu);
-    $("<br/>").appendTo(menu);
 
     var lbl = $("<label/>").addClass("checkbox")
         .text("Hide poll results")
         .appendTo(menu);
     var hidden = $("<input/>").attr("type", "checkbox")
         .appendTo(lbl);
-    $("<br/>").appendTo(menu);
 
     $("<strong/>").text("Options").appendTo(menu);
-    $("<br/>").appendTo(menu);
 
-    var addbtn = $("<button/>").addClass("btn")
+    var addbtn = $("<button/>").addClass("btn btn-sm btn-default")
         .text("Add Option")
         .appendTo(menu);
-    $("<br/>").appendTo(menu);
 
     function addOption() {
         $("<input/>").attr("type", "text")
             .addClass("form-control poll-menu-option")
             .insertBefore(addbtn);
-        $("<br/>").insertBefore(addbtn);
     }
 
     addbtn.click(addOption);
@@ -1173,7 +1175,7 @@ function addLibraryButtons(li, id, source) {
 
     if(hasPermission("playlistadd")) {
         if(hasPermission("playlistnext")) {
-            $("<button/>").addClass("btn btn-xs")
+            $("<button/>").addClass("btn btn-xs btn-default")
                 .text("Next")
                 .click(function() {
                     socket.emit("queue", {
@@ -1184,7 +1186,7 @@ function addLibraryButtons(li, id, source) {
                 })
                 .appendTo(btns);
         }
-        $("<button/>").addClass("btn btn-xs")
+        $("<button/>").addClass("btn btn-xs btn-default")
             .text("End")
             .click(function() {
                 socket.emit("queue", {
@@ -1197,7 +1199,7 @@ function addLibraryButtons(li, id, source) {
     }
     if(CLIENT.rank >= 2 && source === "library") {
         $("<button/>").addClass("btn btn-xs btn-danger")
-            .html("<i class='icon-trash'></i>")
+            .html("<i class='glyphicon glyphicon-trash'></i>")
             .click(function() {
                 socket.emit("uncache", {
                     id: id
@@ -1545,29 +1547,32 @@ function addChatMessage(data) {
 
 /* layouts */
 
-function fluidLayout() {
-    $(".row").each(function() {
-        $(this).removeClass("row").addClass("row-fluid");
-    });
-    $(".container").each(function() {
-        $(this).removeClass("container").addClass("container-fluid");
-    });
-    // Video might not be there, but the playlist is
-    VWIDTH = $("#videowidth").css("width").replace("px", "");
+function onResize() {
+    VWIDTH = $("#videowidth").width() + "";
     VHEIGHT = ""+parseInt(parseInt(VWIDTH) * 9 / 16);
-    if($("#ytapiplayer").length > 0) {
-        $("#ytapiplayer").attr("width", VWIDTH);
-        $("#ytapiplayer").attr("height", VHEIGHT);
-    }
     $("#messagebuffer").css("height", (VHEIGHT - 31) + "px");
     $("#userlist").css("height", (VHEIGHT - 31) + "px");
-    $("#chatline").removeClass().addClass("span12");
-    $("#channelsettingswrap3").css("margin-left", "0");
+    if($("#ytapiplayer").length > 0) {
+        $("#ytapiplayer").width(VWIDTH);
+        $("#ytapiplayer").height(VHEIGHT);
+    }
+
+    if ($("#chatwrap").width() < 400)
+        $("#userlist").width(100);
+    else
+        $("#userlist").width(150);
+
+    scrollChat();
+}
+
+function fluidLayout() {
+    $(".container").css("max-width", "100%");
+    onResize();
 }
 
 function synchtubeLayout() {
     $("#videowrap").detach().insertBefore($("#chatwrap"));
-    $("#rightpane-outer").detach().insertBefore($("#leftpane-outer"));
+    $("#rightpane").detach().insertBefore($("#leftpane"));
     $("#userlist").css("float", "right");
 }
 

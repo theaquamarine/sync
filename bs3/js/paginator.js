@@ -14,7 +14,7 @@
         for(var k in defaults)
             if(!this.opts[k])
                 this.opts[k] = defaults[k];
-        this.paginator = $("<div/>").addClass("pagination");
+        this.paginator = $("<ul/>").addClass("pagination");
         this.loadPage(0);
     }
 
@@ -24,7 +24,7 @@
         this.paginator.html("");
         if(this.items.length < this.opts.itemsPerPage)
             return;
-        var ul = $("<ul/>").appendTo(this.paginator);
+        var ul = this.paginator;
         var s = p - parseInt(this.opts.maxPages / 2);
         s = s + this.opts.maxPages < pages ? s : pages - this.opts.maxPages;
         s = s < 0 ? 0 : s;

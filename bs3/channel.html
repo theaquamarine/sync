@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Calvin 'calzoneman' 'cyzon' Montgomery">
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link id="usertheme" href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/navbar-footer.css" rel="stylesheet">
     <link href="css/cytube.css" rel="stylesheet">
     <link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
@@ -34,14 +34,14 @@
       </div>
       <div id="mainpage" class="container">
         <div id="toprow" class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-12 col-md-12">
             <div id="motdwrap" class="well">
               <button id="togglemotd" type="button" class="close pull-right"><span class="glyphicon glyphicon-minus"></span></button>
               <div id="motd"></div>
               <div class="clear"></div>
             </div>
           </div>
-          <div id="drinkbarwrap" class="col-lg-12">
+          <div id="drinkbarwrap" class="col-lg-12 col-md-12">
             <div id="drinkbar">
               <h1 id="drinkcount"></h1>
             </div>
@@ -49,25 +49,25 @@
         </div>
         <div id="announcements" class="row"></div>
         <div id="main" class="row">
-          <div id="chatwrap" class="col-lg-5">
+          <div id="chatwrap" class="col-lg-5 col-md-5">
             <div id="usercountwrap"><i id="userlisttoggle" title="Show/Hide Userlist" class="glyphicon glyphicon-chevron-up pull-left pointer"></i><span id="usercount" class="pointer">Not Connected</span><span id="modflair" class="label label-default pull-right pointer">M</span><span id="adminflair" class="label label-default pull-right pointer">A</span></div>
             <div id="userlist"></div>
             <div id="messagebuffer"></div>
             <input id="chatline" type="text" maxlength="240" class="form-control">
           </div>
-          <div id="videowrap" class="col-lg-7">
+          <div id="videowrap" class="col-lg-7 col-md-7">
             <p id="currenttitle">Nothing Playling</p>
             <div id="ytapiplayer"></div>
           </div>
         </div>
         <div id="playlistrow" class="row">
-          <div id="leftpane" class="col-lg-5">
+          <div id="leftpane" class="col-lg-5 col-md-5">
             <div id="leftpane-inner" class="row">
-              <div id="pollbtnwrap" class="col-lg-12">
+              <div id="pollbtnwrap" class="col-lg-12 col-md-12">
                 <button id="newpollbtn" class="btn btn-sm btn-default">New Poll</button>
               </div>
-              <div id="pollwrap" class="col-lg-12"></div>
-              <div id="searchwrap" class="col-lg-12">
+              <div id="pollwrap" class="col-lg-12 col-md-12"></div>
+              <div id="searchwrap" class="col-lg-12 col-md-12">
                 <div id="searchpanel-group" class="panel-group">
                   <div id="searchpanel" class="panel panel-default">
                     <div class="panel-heading">
@@ -75,7 +75,7 @@
                     </div>
                     <div id="librarywrap" class="panel-body collapse">
                       <div class="row">
-                        <div id="querywrap" class="col-lg-12">
+                        <div id="querywrap" class="col-lg-12 col-md-12">
                           <div class="input-group">
                             <input id="library_query" type="text" class="form-control"><span class="input-group-btn">
                               <button id="library_search" class="btn btn-default">Library</button></span><span class="input-group-btn">
@@ -84,12 +84,12 @@
                         </div>
                         <!-- #searchbtns.col-lg-6.btn-group-->
                       </div>
-                      <ul id="library" class="videolist col-lg-12"></ul>
+                      <ul id="library" class="videolist col-lg-12 col-md-12"></ul>
                     </div>
                   </div>
                 </div>
               </div>
-              <div id="playlistmanagerwrap" class="col-lg-12">
+              <div id="playlistmanagerwrap" class="col-lg-12 col-md-12">
                 <div id="playlistmanager-group" class="panel-group">
                   <div id="playlistmanagerpanel" class="panel panel-default">
                     <div class="panel-heading">
@@ -97,13 +97,13 @@
                     </div>
                     <div id="userplaylistwrap" class="panel-body collapse">
                       <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 col-md-12">
                           <div class="input-group">
                             <input id="userpl_name" type="text" placeholder="Playlist Name" class="form-control"><span class="input-group-btn">
                               <button id="userpl_save" class="btn btn-default">Save</button></span>
                           </div>
                         </div>
-                        <ul id="userpl_list" class="col-lg-12"></ul>
+                        <ul id="userpl_list" class="col-lg-12 col-md-12"></ul>
                       </div>
                     </div>
                   </div>
@@ -111,9 +111,9 @@
               </div>
             </div>
           </div>
-          <div id="rightpane" class="col-lg-7">
+          <div id="rightpane" class="col-lg-7 col-md-7">
             <div id="rightpane-inner" class="row">
-              <div id="qualitywrap" class="col-lg-12">
+              <div id="qualitywrap" class="col-lg-12 col-md-12">
                 <div class="dropdown btn-group">
                   <button id="qdrop" data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">Quality<b class="caret"></b></button>
                   <ul role="menu" aria-labelledby="qdrop" class="dropdown-menu">
@@ -129,7 +129,7 @@
               </div>
               <!-- electric boogaloo-->
               <div id="queue_align2"></div>
-              <div id="plcontrolsouterwrap" class="col-lg-12">
+              <div id="plcontrolsouterwrap" class="col-lg-12 col-md-12">
                 <div id="plcontrols-group" class="panel-group">
                   <div id="plcontrolspanel" class="panel panel-default">
                     <div class="panel-heading">
@@ -137,7 +137,7 @@
                     </div>
                     <div id="playlist_controls" class="panel-body collapse">
                       <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 col-md-12">
                           <div class="input-group">
                             <input id="mediaurl" type="text" placeholder="Media URL" class="form-control input-block-level"><span class="input-group-btn">
                               <button id="queue_next" class="btn btn-default">Next</button></span><span class="input-group-btn">
@@ -146,7 +146,7 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div id="customembed_wrap" class="col-lg-12">
+                        <div id="customembed_wrap" class="col-lg-12 col-md-12">
                           <button id="customembed_btn" class="btn btn-default btn-block">Custom Embed</button>
                           <div id="customembed_entry">
                             Paste the embed code below and click Next or End.
@@ -154,7 +154,7 @@
                             <textarea id="customembed_code" rows="3" class="input-block-level form-control"></textarea>
                           </div>
                         </div>
-                        <div id="extended_controls" class="col-lg-12">
+                        <div id="extended_controls" class="col-lg-12 col-md-12">
                           <button id="clearplaylist" class="btn btn-default btn-block">Clear Playlist</button>
                           <button id="shuffleplaylist" class="btn btn-default btn-block">Shuffle Playlist</button>
                         </div>
@@ -163,12 +163,12 @@
                   </div>
                 </div>
               </div>
-              <div id="voteskipwrap" class="col-lg-12 btn-group">
+              <div id="voteskipwrap" class="col-lg-12 col-md-12 btn-group">
                 <button id="voteskip" class="btn btn-default">Voteskip</button>
                 <button id="getplaylist" class="btn btn-default">Get Playlist URLs</button>
                 <button id="qlockbtn" title="Playlist Locked" class="btn btn-danger"><i class="glyphicon glyphicon-lock"></i></button>
               </div>
-              <div class="col-lg-12">
+              <div class="col-lg-12 col-md-12">
                 <div id="queue" class="videolist">
                   <li class="queue_entry"><a href="#" class="qe_title">Derp</a><span class="qe_time">00:00</span>
                     <div class="qe_clear"></div>
@@ -177,19 +177,19 @@
                     <div class="qe_clear"></div>
                   </li>
                 </div>
-                <div id="plmeta"><span id="plclount">0 items</span><span id="pllength">00:00:00</span></div>
+                <div id="plmeta"><span id="plcount">0 items</span><span id="pllength">00:00:00</span></div>
               </div>
             </div>
           </div>
         </div>
         <div id="channelsettingswrap-outer" class="row">
-          <div id="channelsettingswrap-inner" class="col-lg-12">
+          <div id="channelsettingswrap-inner" class="col-lg-12 col-md-12">
             <div id="channelsettingswrap" class="well"></div>
           </div>
         </div>
         <div id="resizewrap" class="row">
-          <div class="col-lg-5"></div>
-          <div id="videowidth" class="col-lg-7"></div>
+          <div class="col-lg-5 col-md-5"></div>
+          <div id="videowidth" class="col-lg-7 col-md-7"></div>
         </div>
         <div id="sitefooter"></div>
       </div>

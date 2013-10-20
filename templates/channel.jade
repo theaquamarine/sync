@@ -7,7 +7,7 @@ html(lang="en")
     meta(name="author", content="Calvin 'calzoneman' 'cyzon' Montgomery")
 
     link(href="css/bootstrap.css", rel="stylesheet")
-    link(href="css/bootstrap-theme.css", rel="stylesheet")
+    link#usertheme(href="css/bootstrap-theme.css", rel="stylesheet")
     link(href="css/navbar-footer.css", rel="stylesheet")
     link(href="css/cytube.css", rel="stylesheet")
     link(href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css", rel="stylesheet")
@@ -35,18 +35,18 @@ html(lang="en")
             a#logout.navbar-link(href="javascript:void(0)") Logout
       #mainpage.container
         #toprow.row
-          .col-lg-12
+          .col-lg-12.col-md-12
             #motdwrap.well
               button#togglemotd.close.pull-right(type="button")
                 span.glyphicon.glyphicon-minus
               #motd
               .clear
-          #drinkbarwrap.col-lg-12
+          #drinkbarwrap.col-lg-12.col-md-12
             #drinkbar
               h1#drinkcount
         #announcements.row
         #main.row
-          #chatwrap.col-lg-5
+          #chatwrap.col-lg-5.col-md-5
             #usercountwrap
               i#userlisttoggle.glyphicon.glyphicon-chevron-up.pull-left.pointer(title="Show/Hide Userlist")
               span#usercount.pointer Not Connected
@@ -55,16 +55,16 @@ html(lang="en")
             #userlist
             #messagebuffer
             input#chatline.form-control(type="text", maxlength="240")
-          #videowrap.col-lg-7
+          #videowrap.col-lg-7.col-md-7
             p#currenttitle Nothing Playling
             #ytapiplayer
         #playlistrow.row
-          #leftpane.col-lg-5
+          #leftpane.col-lg-5.col-md-5
             #leftpane-inner.row
-              #pollbtnwrap.col-lg-12
+              #pollbtnwrap.col-lg-12.col-md-12
                 button#newpollbtn.btn.btn-sm.btn-default New Poll
-              #pollwrap.col-lg-12
-              #searchwrap.col-lg-12
+              #pollwrap.col-lg-12.col-md-12
+              #searchwrap.col-lg-12.col-md-12
                 #searchpanel-group.panel-group
                   #searchpanel.panel.panel-default
                     .panel-heading
@@ -72,7 +72,7 @@ html(lang="en")
                         a.accordion-toggle(data-toggle="collapse", data-parent="#searchpanel-group", href="#librarywrap") Library/YouTube Search
                     #librarywrap.panel-body.collapse
                       .row
-                        #querywrap.col-lg-12
+                        #querywrap.col-lg-12.col-md-12
                           .input-group
                             input#library_query.form-control(type="text")
                             span.input-group-btn
@@ -80,8 +80,8 @@ html(lang="en")
                             span.input-group-btn
                               button#youtube_search.btn.btn-default YouTube
                         // #searchbtns.col-lg-6.btn-group
-                      ul#library.videolist.col-lg-12
-              #playlistmanagerwrap.col-lg-12
+                      ul#library.videolist.col-lg-12.col-md-12
+              #playlistmanagerwrap.col-lg-12.col-md-12
                 #playlistmanager-group.panel-group
                   #playlistmanagerpanel.panel.panel-default
                     .panel-heading
@@ -89,15 +89,15 @@ html(lang="en")
                         a#userpltoggle.accordion-toggle(data-toggle="collapse", data-parent="playlistmanager-group", href="#userplaylistwrap") Playlist Manager
                     #userplaylistwrap.panel-body.collapse
                       .row
-                        .col-lg-12
+                        .col-lg-12.col-md-12
                           .input-group
                             input#userpl_name.form-control(type="text", placeholder="Playlist Name")
                             span.input-group-btn
                               button#userpl_save.btn.btn-default Save
-                        ul#userpl_list.col-lg-12
-          #rightpane.col-lg-7
+                        ul#userpl_list.col-lg-12.col-md-12
+          #rightpane.col-lg-7.col-md-7
             #rightpane-inner.row
-              #qualitywrap.col-lg-12
+              #qualitywrap.col-lg-12.col-md-12
                 .dropdown.btn-group
                   button#qdrop.btn.btn-sm.btn-default.dropdown-toggle(data-toggle="dropdown") Quality
                     b.caret
@@ -114,7 +114,7 @@ html(lang="en")
                 button#mediarefresh.btn.btn-sm.btn-default Refresh Media
               // electric boogaloo
               #queue_align2
-              #plcontrolsouterwrap.col-lg-12
+              #plcontrolsouterwrap.col-lg-12.col-md-12
                 #plcontrols-group.panel-group
                   #plcontrolspanel.panel.panel-default
                     .panel-heading
@@ -123,7 +123,7 @@ html(lang="en")
               
                     #playlist_controls.panel-body.collapse
                       .row
-                        .col-lg-12
+                        .col-lg-12.col-md-12
                           .input-group
                             input#mediaurl.form-control.input-block-level(type="text", placeholder="Media URL")
                             span.input-group-btn
@@ -131,21 +131,21 @@ html(lang="en")
                             span.input-group-btn
                               button#queue_end.btn.btn-default At End
                       .row
-                        #customembed_wrap.col-lg-12
+                        #customembed_wrap.col-lg-12.col-md-12
                           button#customembed_btn.btn.btn-default.btn-block Custom Embed
                           #customembed_entry
                             | Paste the embed code below and click Next or End.
                             | Acceptable embed codes are <code>&lt;iframe&gt;</code> and <code>&lt;object&gt;</code> tags.
                             textarea#customembed_code.input-block-level.form-control(rows="3")
-                        #extended_controls.col-lg-12
+                        #extended_controls.col-lg-12.col-md-12
                           button#clearplaylist.btn.btn-default.btn-block Clear Playlist
                           button#shuffleplaylist.btn.btn-default.btn-block Shuffle Playlist
-              #voteskipwrap.col-lg-12.btn-group
+              #voteskipwrap.col-lg-12.col-md-12.btn-group
                 button#voteskip.btn.btn-default Voteskip
                 button#getplaylist.btn.btn-default Get Playlist URLs
                 button#qlockbtn.btn.btn-danger(title="Playlist Locked")
                   i.glyphicon.glyphicon-lock
-              .col-lg-12
+              .col-lg-12.col-md-12
                 #queue.videolist
                   li.queue_entry
                     a.qe_title(href="#") Derp
@@ -156,14 +156,14 @@ html(lang="en")
                     span.qe_time 00:00
                     div.qe_clear
                 #plmeta
-                  span#plclount 0 items
+                  span#plcount 0 items
                   span#pllength 00:00:00
         #channelsettingswrap-outer.row
-          #channelsettingswrap-inner.col-lg-12
+          #channelsettingswrap-inner.col-lg-12.col-md-12
             #channelsettingswrap.well
         #resizewrap.row
-          .col-lg-5
-          #videowidth.col-lg-7
+          .col-lg-5.col-md-5
+          #videowidth.col-lg-7.col-md-7
         #sitefooter
     #footer
       .container
