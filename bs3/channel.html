@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>CyTube</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Calvin 'calzoneman 'cyzon' Montgomery">
+    <meta name="author" content="Calvin 'calzoneman' 'cyzon' Montgomery">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/navbar-footer.css" rel="stylesheet">
@@ -29,9 +29,7 @@
             <button id="guestlogin" class="btn btn-default">Guest Login</button>
             <button id="login" class="btn btn-default">Login</button>
           </form>
-          <div id="logoutform" style="display: none" class="navbar-right">
-            <p id="welcome" class="navbar-text"></p>
-          </div>
+          <p id="logoutform" class="navbar-text pull-right"><span id="welcome"></span><span>&nbsp;&middot;&nbsp;</span><a id="logout" href="javascript:void(0)" class="navbar-link">Logout</a></p>
         </div>
       </div>
       <div id="mainpage" class="container">
@@ -204,7 +202,6 @@
     <script src="js/jquery.js"></script>
     <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/respond.js"></script>
     <script src="js/data.js"></script>
     <script src="js/iourl.js"></script>
     <script src="js/player.js"></script>
@@ -212,5 +209,12 @@
     <script src="js/util.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/callbacks.js"></script>
+    <!-- APIs-->
+    <script defer src="//www.youtube.com/iframe_api"></script>
+    <script defer src="//api.dmcdn.net/all.js"></script>
+    <script defer src="js/jwplayer.js"></script>
+    <script defer src="js/sc.js"></script>
+    <script defer src="js/froogaloop.min.js"></script>
+    <script defer src="js/swf.js"></script>
   </body>
 </html>

@@ -551,8 +551,8 @@ function showOptionsMenu() {
 
         var addOption = function (form, lbl, thing) {
             var g = $("<div/>").addClass("form-group").appendTo(form);
-            $("<label/>").addClass("control-label col-lg-3").text(lbl).appendTo(g);
-            var out = $("<div/>").addClass("col-lg-9").appendTo(g);
+            $("<label/>").addClass("control-label col-lg-4").text(lbl).appendTo(g);
+            var out = $("<div/>").addClass("col-lg-8").appendTo(g);
             //var c = $("<div/>").addClass("controls").appendTo(out);
             thing.appendTo(out);
         };

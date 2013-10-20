@@ -621,9 +621,8 @@ Callbacks = {
         }
         else {
             $("#welcome").text("Logged in as " + data.name);
-            $("#loginform").css("display", "none");
-            $("#logoutform").css("display", "");
-            $("#loggedin").css("display", "");
+            $("#loginform").hide();
+            $("#logoutform").show();
             SESSION = data.session || "";
             CLIENT.name = data.name;
             CLIENT.logged_in = true;

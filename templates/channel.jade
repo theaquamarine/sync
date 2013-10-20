@@ -4,7 +4,7 @@ html(lang="en")
     meta(charset="utf-8")
     title= siteTitle
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(name="author", content="Calvin 'calzoneman 'cyzon' Montgomery")
+    meta(name="author", content="Calvin 'calzoneman' 'cyzon' Montgomery")
 
     link(href="css/bootstrap.css", rel="stylesheet")
     link(href="css/bootstrap-theme.css", rel="stylesheet")
@@ -29,8 +29,10 @@ html(lang="en")
               input#guestname.form-control(type="text", placeholder="Name")
             button#guestlogin.btn.btn-default Guest Login
             button#login.btn.btn-default Login
-          #logoutform.navbar-right(style="display: none")
-            p#welcome.navbar-text
+          p#logoutform.navbar-text.pull-right
+            span#welcome
+            span &nbsp;&middot;&nbsp;
+            a#logout.navbar-link(href="javascript:void(0)") Logout
       #mainpage.container
         #toprow.row
           .col-lg-12
@@ -170,7 +172,6 @@ html(lang="en")
     script(src="js/jquery.js")
     script(src="//code.jquery.com/ui/1.10.3/jquery-ui.js")
     script(src="js/bootstrap.js")
-    script(src="js/respond.js")
     script(src="js/data.js")
     script(src="js/iourl.js")
     script(src="js/player.js")
@@ -178,3 +179,10 @@ html(lang="en")
     script(src="js/util.js")
     script(src="js/ui.js")
     script(src="js/callbacks.js")
+    // APIs
+    script(defer, src="//www.youtube.com/iframe_api")
+    script(defer, src="//api.dmcdn.net/all.js")
+    script(defer, src="js/jwplayer.js")
+    script(defer, src="js/sc.js")
+    script(defer, src="js/froogaloop.min.js")
+    script(defer, src="js/swf.js")

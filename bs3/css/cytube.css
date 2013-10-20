@@ -1,3 +1,7 @@
+#logoutform {
+    display: none;
+}
+
 #drinkbar {
     margin-left: 0;
     background-color: #000000;
@@ -195,7 +199,7 @@
 .queue_sortable li {
     cursor: row-resize;
 }
- 
+
 .poll-notify {
     color: #0000aa;
     font-weight: bold;
