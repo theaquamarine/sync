@@ -1,13 +1,9 @@
 (function() {
 
-    $("#channelsettingswrap div.col-lg-12").each(function() {
-        $(this).hide();
-    });
-
     function clickHandler(selector, div) {
         $(selector).click(function() {
             $("#csdropdown_title").text($(selector).text());
-            $("#channelsettingswrap div.col-lg-12").each(function() {
+            $("#channelsettingswrap > div.col-lg-12").each(function() {
                 $(this).hide();
             });
             $(div).show();

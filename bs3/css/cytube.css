@@ -30,10 +30,7 @@
 #userlist {
     float: left;
     width: 150px;
-}
-
-#messagebuffer {
-    border-left: 0;
+    border-right: 0;
 }
 
 #ytapiplayer {
@@ -150,6 +147,10 @@
 }
 
 .qe_clear {
+    clear: both;
+}
+
+.clear {
     clear: both;
 }
 
@@ -291,4 +292,8 @@
     height: 80px;
     border: 1px solid #aaaaaa;
     border-radius: 5px;
+}
+
+#togglemotd .glyphicon {
+    font-size: 12pt;
 }

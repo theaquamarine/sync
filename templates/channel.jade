@@ -32,8 +32,12 @@ html(lang="en")
             p#welcome.navbar-text
       #mainpage.container
         #toprow.row
-          #motdwrap.col-lg-12
-            #motd.well
+          .col-lg-12
+            #motdwrap.well
+              button#togglemotd.close.pull-right(type="button")
+                span.glyphicon.glyphicon-minus
+              #motd
+              .clear
           #drinkbarwrap.col-lg-12
             #drinkbar
               h1#drinkcount

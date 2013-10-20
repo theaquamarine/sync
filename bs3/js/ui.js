@@ -40,22 +40,19 @@ function generateToggle(chevron, div) {
 /* setup show/hide toggles */
 generateToggle("#usercount", "#userlist");
 generateToggle("#userlisttoggle", "#userlist");
-$("#usercountwrap").click(scrollChat);
-generateToggle("#librarytoggle", "#librarywrap");
-generateToggle("#userpltoggle", "#userplaylistwrap");
-generateToggle("#playlisttoggle", "#playlist_controls");
+$("#usercount").click(scrollChat);
 
 $("#togglemotd").click(function () {
     var hidden = $("#motd").css("display") === "none";
     $("#motd").toggle();
     if (hidden) {
-        $("#togglemotd").find(".icon-plus")
-            .removeClass("icon-plus")
-            .addClass("icon-minus");
+        $("#togglemotd").find(".glyphicon-plus")
+            .removeClass("glyphicon-plus")
+            .addClass("glyphicon-minus");
     } else {
-        $("#togglemotd").find(".icon-minus")
-            .removeClass("icon-minus")
-            .addClass("icon-plus");
+        $("#togglemotd").find(".glyphicon-minus")
+            .removeClass("glyphicon-minus")
+            .addClass("glyphicon-plus");
     }
 });
 
