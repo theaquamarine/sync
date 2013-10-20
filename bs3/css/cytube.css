@@ -176,3 +176,119 @@
     overflow-y: scroll;
     margin-top: 10px;
 }
+
+.server-msg-disconnect {
+    border: 1px solid #ff0000;
+    margin: 5px;
+    padding: 5px;
+    color: #ff0000;
+}
+
+.server-msg-reconnect {
+    border: 1px solid #009900;
+    margin: 5px;
+    padding: 5px;
+    color: #009900;
+}
+
+.queue_sortable li {
+    cursor: row-resize;
+}
+ 
+.poll-notify {
+    color: #0000aa;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.userlist_siteadmin {
+    color: #cc0000;
+    font-weight: bold;
+}
+
+.userlist_owner {
+    color: #0000cc;
+    font-weight: bold;
+}
+
+.userlist_op {
+    color: #00aa00;
+}
+
+.userlist_guest {
+    color: #888888;
+}
+
+.action {
+    font-style: italic;
+    color: #888888;
+}
+
+.server-whisper {
+    font-style: italic;
+    color: #888888;
+    font-size: 8pt;
+}
+
+.spoiler {
+    color: #000000;
+    background-color: #000000;
+}
+
+.spoiler:hover {
+    color: #ffffff;
+}
+
+.greentext {
+    color: #789922; /* Color value directly from 4chan */
+}
+
+.shout {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 18pt;
+}
+
+.mono {
+    font-family: Monospace;
+}
+
+.nick-highlight {
+    background-color: #ddffdd;
+}
+
+.nick-hover {
+    background-color: #ffff99;
+}
+
+.timestamp {
+    font-size: 8pt;
+}
+
+.profile-box {
+    z-index: 9999;
+    position: absolute;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+    background-color: #ffffff;
+    max-width: 200px;
+    padding: 5px;
+}
+
+.user-dropdown {
+    z-index: 9999;
+    position: absolute;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+    max-width: 200px;
+    padding: 5px;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+}
