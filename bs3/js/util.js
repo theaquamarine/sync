@@ -848,7 +848,7 @@ function showLoginMenu() {
         .attr("src", "login.html")
         .css("border", "none")
         .css("width", "100%")
-        .css("height", "300px")
+        .css("height", "230px")
         .css("margin", "0")
         .appendTo(body);
     var timer = setInterval(function() {
@@ -901,7 +901,7 @@ function showLoginMenu() {
         window.attachEvent("onmessage", respond);
     }
     var footer = $("<div/>").addClass("modal-footer").appendTo(modal);
-    outer.on("hidden", function() {
+    outer.on("hidden.bs.modal", function() {
         unhidePlayer();
         outer.remove();
     });

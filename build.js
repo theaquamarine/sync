@@ -17,7 +17,8 @@ var files = [
     'templates/index.jade',
     'templates/channel.jade',
     'templates/modoptions.jade',
-    'templates/useroptions.jade'
+    'templates/useroptions.jade',
+    'templates/login.jade'
 ];
 
 var locals = {

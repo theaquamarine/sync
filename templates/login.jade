@@ -1,0 +1,27 @@
+doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title #{siteTitle} - Login
+    link(href="css/bootstrap.css", rel="stylesheet")
+  body
+    .container
+      .row
+        .col-lg-12
+          form.form-horizontal(role="form", action="javascript:void(0)")
+            .form-group
+              label.control-label.col-lg-3(for="username") Username
+              .col-lg-9
+                input#username.form-control(type="text")
+            .form-group
+              label.control-label.col-lg-3(for="pw") Password
+              .col-lg-9
+                input#pw.form-control(type="password")
+            .form-group
+              label.control-label.col-lg-3(for="login")
+              .col-lg-9
+                button#login.btn.btn-default Login
+    script(src="js/jquery.js")
+    script(src="js/data.js")
+    script(src="js/iourl.js")
+    script(src="js/login.js")
