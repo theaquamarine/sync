@@ -1,0 +1,19 @@
+.modal-header
+  button.close(data-dismiss="modal", aria-hidden="true") &times;
+  h4.modal-title User Options
+  .btn-group
+    button#uopt-btn-general.btn.btn-xs.btn-default General
+    button#uopt-btn-playback.btn.btn-xs.btn-default Playback
+    button#uopt-btn-chat.btn.btn-xs.btn-default Chat
+    button#uopt-btn-mod.btn.btn-xs.btn-default Moderator
+.modal-body
+  #uopt-panel-general.uopt-panel
+    h4 General Options
+  #uopt-panel-playback.uopt-panel
+    h4 Playback Options
+  #uopt-panel-chat.uopt-panel
+    h4 Chat Options
+  #uopt-panel-mod.uopt-panel
+    h4 Moderator Options
+.modal-footer
+  button#uopt-btn-save.btn.btn-sm.btn-primary.pull-right Save

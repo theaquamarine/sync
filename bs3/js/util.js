@@ -516,6 +516,7 @@ function rebuildPlaylist() {
 function showOptionsMenu() {
     hidePlayer();
     var outer = $("<div/>").addClass("modal fade")
+        .attr("role", "dialog")
         .appendTo($("body"));
     var dlg = $("<div/>").addClass("modal-dialog")
         .appendTo(outer);
@@ -529,7 +530,7 @@ function showOptionsMenu() {
 
         var tabHandler = function (btnid, panelid) {
             $(btnid).click(function () {
-                modal.find(".btn.btn-small").attr("disabled", false);
+                modal.find(".btn.btn-xs").attr("disabled", false);
                 modal.find(".uopt-panel").hide();
                 $(btnid).attr("disabled", true);
                 $(panelid).show();
@@ -549,10 +550,11 @@ function showOptionsMenu() {
         };
 
         var addOption = function (form, lbl, thing) {
-            var g = $("<div/>").addClass("control-group").appendTo(form);
-            $("<label/>").addClass("control-label").text(lbl).appendTo(g);
-            var c = $("<div/>").addClass("controls").appendTo(g);
-            thing.appendTo(c);
+            var g = $("<div/>").addClass("form-group").appendTo(form);
+            $("<label/>").addClass("control-label col-lg-3").text(lbl).appendTo(g);
+            var out = $("<div/>").addClass("col-lg-9").appendTo(g);
+            //var c = $("<div/>").addClass("controls").appendTo(out);
+            thing.appendTo(out);
         };
 
         var addCheckbox = function (form, opt, lbl) {
@@ -567,7 +569,7 @@ function showOptionsMenu() {
         // general options
         var general = initForm("#uopt-panel-general");
 
-        var gen_theme = $("<select/>");
+        var gen_theme = $("<select/>").addClass("form-control");
         $("<option/>").attr("value", "default")
             .text("Default")
             .appendTo(gen_theme);
@@ -580,7 +582,7 @@ function showOptionsMenu() {
         gen_theme.val(USEROPTS.theme);
         addOption(general, "Theme", gen_theme);
 
-        var gen_layout = $("<select/>");
+        var gen_layout = $("<select/>").addClass("form-control");
         $("<option/>").attr("value", "default")
             .text("Compact")
             .appendTo(gen_layout);
@@ -593,11 +595,12 @@ function showOptionsMenu() {
         gen_layout.val(USEROPTS.layout);
         addOption(general, "Layout", gen_layout);
 
-        var gen_layoutwarn = $("<p/>").addClass("text-error")
+        var gen_layoutwarn = $("<p/>").addClass("text-danger")
             .text("Changing layouts may require a refresh");
         addOption(general, "", gen_layoutwarn);
 
         var gen_css = $("<input/>").attr("type", "text")
+            .addClass("form-control")
             .attr("placeholder", "Stylesheet URL");
         gen_css.val(USEROPTS.css);
         addOption(general, "User CSS", gen_css);
@@ -615,7 +618,7 @@ function showOptionsMenu() {
         gen_altsocket.prop("checked", USEROPTS.altsocket);
 
         var gen_altsocketinfo = $("<p/>")
-            .addClass("text-error")
+            .addClass("text-danger")
             .text("Alternate socket requires a refresh after changing.  "+
                   "It should only be used if the default (unchecked) "+
                   "does not work.");
@@ -627,7 +630,7 @@ function showOptionsMenu() {
         gen_secure.attr("disabled", !ALLOW_SSL);
 
         var gen_secureinfo = $("<p/>")
-            .addClass("text-error")
+            .addClass("text-danger")
             .text("If enabled, websocket traffic and API calls (logins, "+
                   "account management) will be sent over a secure "+
                   "connection.  Changes take effect after a refresh.");
@@ -644,6 +647,7 @@ function showOptionsMenu() {
         pl_synch.prop("checked", USEROPTS.synch);
 
         var pl_synchacc = $("<input/>").attr("type", "text")
+            .addClass("form-control")
             .attr("placeholder", "Accuracy in seconds");
         pl_synchacc.val(USEROPTS.sync_accuracy);
         addOption(playback, "Synch Accuracy (seconds)", pl_synchacc);
@@ -652,7 +656,7 @@ function showOptionsMenu() {
                                    "Allow transparency over video player");
         pl_wmode.prop("checked", USEROPTS.wmode_transparent);
 
-        var pl_wmodewarn = $("<p/>").addClass("text-error")
+        var pl_wmodewarn = $("<p/>").addClass("text-danger")
             .text("Enabling transparent wmode may cause performance "+
                   "issues on some systems");
         addOption(playback, "", pl_wmodewarn);
@@ -742,7 +746,7 @@ function showOptionsMenu() {
         });
     });
 
-    outer.on("hidden", function () {
+    outer.on("hidden.bs.modal", function () {
         unhidePlayer();
         applyOpts();
         outer.remove();
@@ -823,8 +827,13 @@ applyOpts();
 
 function showLoginMenu() {
     hidePlayer();
-    var modal = $("<div/>").addClass("modal hide fade")
+    var outer = $("<div/>").addClass("modal fade")
+        .attr("role", "modal")
         .appendTo($("body"));
+    var dlg = $("<div/>").addClass("modal-dialog")
+        .appendTo(outer);
+    var modal = $("<div/>").addClass("modal-content")
+        .appendTo(dlg);
     var head = $("<div/>").addClass("modal-header")
         .appendTo(modal);
     $("<button/>").addClass("close")
@@ -879,7 +888,7 @@ function showLoginMenu() {
                     // to get their shit together
                     window.detachEvent("onmessage", respond);
                 }
-                modal.modal("hide");
+                outer.modal("hide");
             }
         }
     }
@@ -892,11 +901,11 @@ function showLoginMenu() {
         window.attachEvent("onmessage", respond);
     }
     var footer = $("<div/>").addClass("modal-footer").appendTo(modal);
-    modal.on("hidden", function() {
+    outer.on("hidden", function() {
         unhidePlayer();
-        modal.remove();
+        outer.remove();
     });
-    modal.modal();
+    outer.modal({ backdrop: false });
 }
 
 function showPollMenu() {
@@ -904,7 +913,7 @@ function showPollMenu() {
     var menu = $("<div/>").addClass("well poll-menu")
         .insertAfter($("#newpollbtn"));
 
-    $("<button/>").addClass("btn btn-danger pull-right")
+    $("<button/>").addClass("btn btn-sm btn-danger pull-right")
         .text("Cancel")
         .appendTo(menu)
         .click(function() {
@@ -915,6 +924,7 @@ function showPollMenu() {
     $("<br/>").appendTo(menu);
 
     var title = $("<input/>").attr("type", "text")
+        .addClass("form-control")
         .appendTo(menu);
     $("<br/>").appendTo(menu);
 
@@ -935,7 +945,7 @@ function showPollMenu() {
 
     function addOption() {
         $("<input/>").attr("type", "text")
-            .addClass("poll-menu-option")
+            .addClass("form-control poll-menu-option")
             .insertBefore(addbtn);
         $("<br/>").insertBefore(addbtn);
     }
@@ -945,7 +955,7 @@ function showPollMenu() {
     addOption();
 
     $("<br/>").appendTo(menu);
-    $("<button/>").addClass("btn")
+    $("<button/>").addClass("btn btn-sm btn-primary")
         .text("Open Poll")
         .addClass("btn-block")
         .appendTo(menu)
