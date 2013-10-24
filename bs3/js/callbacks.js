@@ -1081,7 +1081,7 @@ Callbacks = {
     listPlaylists: function(data) {
         if(data.error) {
             makeAlert("Error", data.error, "alert-danger")
-                .addClass("col-lg-12")
+                .addClass("col-lg-12 col-md-12")
                 .insertBefore($("#userpl_list"));
         }
         else {
@@ -1128,7 +1128,7 @@ Callbacks = {
                 })(li);
                 if(hasPermission("playlistaddlist")) {
                     (function(li) {
-                    $("<button/>").addClass("btn btn-xs")
+                    $("<button/>").addClass("btn btn-xs btn-default")
                         .text("End")
                         .prependTo(bg)
                         .click(function() {
@@ -1141,7 +1141,7 @@ Callbacks = {
 
                     if(hasPermission("playlistnext")) {
                         (function(li) {
-                        $("<button/>").addClass("btn btn-xs")
+                        $("<button/>").addClass("btn btn-xs btn-default")
                             .text("Next")
                             .prependTo(bg)
                             .click(function() {
