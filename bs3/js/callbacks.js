@@ -1080,8 +1080,10 @@ Callbacks = {
 
     listPlaylists: function(data) {
         if(data.error) {
-            makeAlert("Error", data.error, "alert-danger")
+            $("#userplaylistwrap").find(".alert-wrap").remove();
+            var al = makeWrappedAlert("Error", data.error, "alert-danger")
                 .addClass("col-lg-12 col-md-12")
+                .css("margin-top", "10px")
                 .insertBefore($("#userpl_list"));
         }
         else {

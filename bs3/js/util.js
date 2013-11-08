@@ -29,6 +29,28 @@ function makeAlert(title, text, klass) {
     return al;
 }
 
+function makeWrappedAlert(title, text, klass) {
+    if(!klass) {
+        klass = "alert-info";
+    }
+
+    var wrap = $("<div/>").addClass("alert-wrap");
+    var al = $("<div/>").addClass("alert")
+        .appendTo(wrap)
+        .addClass(klass)
+        .html(text);
+    $("<br/>").prependTo(al);
+    $("<strong/>").text(title).prependTo(al);
+    $("<button/>").addClass("close pull-right").html("&times;")
+        .click(function() {
+            al.hide("blind", function() {
+                wrap.remove();
+            });
+        })
+        .prependTo(al);
+    return wrap;
+}
+
 function formatURL(data) {
     switch(data.type) {
         case "yt":

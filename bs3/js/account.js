@@ -64,10 +64,10 @@ function onLogin() {
 function makeTabCallback(tabid, paneid) {
     return function() {
         $("#accountnav li").each(function() {
-            $(this).removeClass("active");
+            $(this).removeClass("nav-active");
         });
 
-        $(tabid).parent().addClass("active");
+        $(tabid).parent().addClass("nav-active");
         $(".col-lg-8").each(function() {
             $(this).css("display", "none");
         });
@@ -99,12 +99,14 @@ $("#profile").click(function() {
 $("#channels").click(makeTabCallback("#channels", "#channelspane"));
 $("#channels").click(function () {
     if(!loggedin) {
-        var error = $("<div/>").addClass("alert alert-danger")
-            .text("You must be logged in to view this page")
-            .insertBefore($("#channellist"));
-        $("<button/>").addClass("close pull-right").click(function () {
-            error.remove();
-        }).html("&times;").prependTo(error);
+        if ($("#channelspane").find(".alert-danger").length === 0) {
+            var error = $("<div/>").addClass("alert alert-danger")
+                .text("You must be logged in to view this page")
+                .insertBefore($("#channellist"));
+            $("<button/>").addClass("close pull-right").click(function () {
+                error.remove();
+            }).html("&times;").prependTo(error);
+        }
         return;
     }
 

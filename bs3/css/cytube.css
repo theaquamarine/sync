@@ -360,7 +360,7 @@ li.nav-header {
 }
 
 li.nav-active, li.nav-active > a, li.nav-active:hover,
-li.nav-active:hover > a {
+li.nav-active:hover > a, li.nav-active > a:link {
     color: #fff;
     background-color: #08c;
 }
