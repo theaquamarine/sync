@@ -1,0 +1,124 @@
+doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title= siteTitle + " - Account"
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="author", content="Calvin 'calzoneman' 'cyzon' Montgomery")
+
+    link(href="css/bootstrap.css", rel="stylesheet")
+    link(href="css/bootstrap-theme.css", rel="stylesheet")
+    link(href="css/navbar-footer.css", rel="stylesheet")
+    link(href="css/cytube.css", rel="stylesheet")
+
+  body
+    #wrap
+      .navbar.navbar-inverse.navbar-fixed-top
+        .container
+          .navbar-header
+            a.navbar-brand(href="index.html")= siteTitle
+          .ul.nav.navbar-nav
+            li: a(href="index.html") Home
+            li
+              a(href="https://github.com/calzoneman/sync/wiki/Beginner%27s-Guide-and-FAQ", target="_blank") Help
+            li.active: a(href="account.html") Account
+      .container
+        .row
+          .well.well-menu.col-lg-4.col-md-4
+            mixin menuitem(id, text)
+              li
+                a(href="javascript:void(0)", id="#{id}")= text
+            ul#accountnav.nav.nav-list
+              li.nav-header Not Logged In
+              +menuitem("register", "Register")
+              +menuitem("login", "Login")
+              li.nav-header Account Control
+              +menuitem("pwchange", "Change Password")
+              +menuitem("pwreset", "Reset Password")
+              +menuitem("profile", "Edit Profile")
+              +menuitem("email", "Change Email")
+              +menuitem("channels", "My Channels")
+          .col-lg-8.col-md-8
+            h3 Select an action from the sidebar
+          mixin formTextbox(id, label, type)
+            .form-group
+              label.col-lg-4.col-md-4.control-label(for="#{id}")= label
+              .col-lg-5.col-md-5
+                input.form-control(id="#{id}", type="#{type}")
+          #registerpane.col-lg-8.col-md-8(style="display: none")
+            h3 Register New Account
+            form.form-horizontal(role="form", action="javascript:void(0)")
+              +formTextbox("regusername", "Username", "text")
+              +formTextbox("regpw", "Password", "password")
+              +formTextbox("regpwconfirm", "Confirm Password", "password")
+              .form-group
+                .col-lg-4.col-md-4
+                .col-lg-5.col-md-5
+                  button#registerbtn.btn.btn-primary Register
+          #loginpane.col-lg-8.col-md-8(style="display: none")
+            h3 Login
+            form.form-horizontal(role="form", action="javascript:void(0)")
+              +formTextbox("loginusername", "Username", "text")
+              +formTextbox("loginpw", "Password", "password")
+              .form-group
+                .col-lg-4.col-md-4
+                .col-lg-5.col-md-5
+                  button#loginbtn.btn.btn-primary Login
+          #changepwpane.col-lg-8.col-md-8(style="display: none")
+            h3 Change Password
+            form.form-horizontal(role="form", action="javascript:void(0)")
+              +formTextbox("cpwusername", "Username", "text")
+              +formTextbox("cpwoldpw", "Old Password", "password")
+              +formTextbox("cpwnewpw", "New Password", "password")
+              +formTextbox("cpwconfirm", "Confirm New Password", "password")
+              .form-group
+                .col-lg-4.col-md-4
+                .col-lg-5.col-md-5
+                  button#cpwbtn.btn.btn-primary Change Password
+          #pwresetpane.col-lg-8.col-md-8(style="display: none")
+            h3 Reset Password
+            form.form-horizontal(role="form", action="javascript:void(0)")
+              +formTextbox("rpusername", "Username", "text")
+              +formTextbox("rpemail", "Email", "password")
+              .form-group
+                .col-lg-4.col-md-4
+                .col-lg-5.col-md-5
+                  button#rpbtn.btn.btn-primary Send Reset
+          #profilepane.col-lg-8.col-md-8(style="display: none")
+            h3 Edit Profile
+            form.form-horizontal(role="form", action="javascript:void(0)")
+              +formTextbox("profileimg", "Image URL", "text")
+              .form-group
+                label.col-lg-4.col-md-4.control-label(for="profiletext") Text
+                .col-lg-5.col-md-5
+                  textarea#profiletext.form-control(rows="10")
+              .form-group
+                .col-lg-4.col-md-4
+                .col-lg-5.col-md-5
+                  button#profilesave.btn.btn-primary Save
+          #changeemailpane.col-lg-8.col-md-8(style="display: none")
+            h3 Change Email
+            form.form-horizontal(role="form", action="javascript:void(0)")
+              +formTextbox("ceusername", "Username", "text")
+              +formTextbox("cepw", "Password", "password")
+              +formTextbox("ceemail", "Email", "text")
+              .form-group
+                .col-lg-4.col-md-4
+                .col-lg-5.col-md-5
+                  button#cebtn.btn.btn-primary Update Email
+          #channelspane.col-lg-8.col-md-8(style="display: none")
+            h3 My Channels
+            table#channellist.table.table-bordered
+              thead
+                tr
+                  th Name
+    #footer
+      .container
+        p.muted.credit.
+          CyTube Software Copyright &copy; 2013 Calvin Montgomery&nbsp;&middot;&nbsp;Available for free on <a href="http://github.com/calzoneman/sync">GitHub</a>&nbsp;&middot;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5Y7PUVVGVSEWG&lc=US&item_name=CyTube&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Donate</a>
+    script(src="js/jquery.js")
+    script(src="js/bootstrap.js")
+    script(src="js/data.js")
+    script(src="js/iourl.js")
+    script(src="js/account.js")
+

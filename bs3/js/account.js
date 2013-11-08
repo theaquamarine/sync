@@ -68,7 +68,7 @@ function makeTabCallback(tabid, paneid) {
         });
 
         $(tabid).parent().addClass("active");
-        $(".span7").each(function() {
+        $(".col-lg-8").each(function() {
             $(this).css("display", "none");
         });
         $(paneid).css("display", "");
@@ -89,7 +89,7 @@ $("#profile").click(function() {
                 $("#profileimg").val(data.profile_image);
             }
             else {
-                $("<div/>").addClass("alert alert-error")
+                $("<div/>").addClass("alert alert-danger")
                     .text("Failed to retrieve profile: " + data.error)
                     .insertBefore($("#profilepane form"));
             }
@@ -99,7 +99,7 @@ $("#profile").click(function() {
 $("#channels").click(makeTabCallback("#channels", "#channelspane"));
 $("#channels").click(function () {
     if(!loggedin) {
-        var error = $("<div/>").addClass("alert alert-error")
+        var error = $("<div/>").addClass("alert alert-danger")
             .text("You must be logged in to view this page")
             .insertBefore($("#channellist"));
         $("<button/>").addClass("close pull-right").click(function () {
@@ -127,7 +127,7 @@ $("#channels").click(function () {
 
 
 $("#registerbtn").click(function() {
-    $("#registerpane").find(".alert-error").remove();
+    $("#registerpane").find(".alert-danger").remove();
     $("#registerpane").find(".error").removeClass("error");
     var name = $("#regusername").val();
     var pw = $("#regpw").val();
@@ -135,14 +135,14 @@ $("#registerbtn").click(function() {
 
     var err = false;
     if(!name.match(/^[a-z0-9_]{1,20}$/i)) {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Usernames must be 1-20 characters long and contain only a-z, 0-9, and underscores")
             .insertAfter($("#regusername").parent().parent());
         err = true;
     }
 
     if(pw == "") {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Password must not be blank")
             .insertAfter($("#regpw").parent().parent());
         $("#regpw").parent().parent().addClass("error");
@@ -150,7 +150,7 @@ $("#registerbtn").click(function() {
     }
 
     if(pw != pwc) {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Passwords do not match")
             .insertAfter($("#regpwconfirm").parent().parent());
         $("#regpwconfirm").parent().parent().addClass("error");
@@ -179,7 +179,7 @@ $("#registerbtn").click(function() {
             $("#regusername").val("");
         }
         else {
-            $("<div/>").addClass("alert alert-error")
+            $("<div/>").addClass("alert alert-danger")
                 .text(data.error)
                 .insertBefore($("#registerpane form"));
         }
@@ -187,11 +187,11 @@ $("#registerbtn").click(function() {
 });
 
 $("#loginbtn").click(function() {
-    $("#loginpane").find(".alert-error").remove();
+    $("#loginpane").find(".alert-danger").remove();
     $("#loginpane").find(".alert-success").remove();
 
     if($("#loginpw").val() == "") {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Please provide a password")
             .insertAfter($("#loginpw").parent().parent());
         $("#loginpw").parent().parent().addClass("error");
@@ -214,7 +214,7 @@ $("#loginbtn").click(function() {
             $("#loginusername").val("");
         }
         else {
-            $("<div/>").addClass("alert alert-error")
+            $("<div/>").addClass("alert alert-danger")
                 .text(data.error)
                 .insertBefore($("#loginpane form"));
         }
@@ -222,7 +222,7 @@ $("#loginbtn").click(function() {
 });
 
 $("#cpwbtn").click(function() {
-    $("#changepwpane").find(".alert-error").remove();
+    $("#changepwpane").find(".alert-danger").remove();
     $("#changepwpane").find(".alert-success").remove();
     $("#changepwpane").find(".error").removeClass("error");
     var name = $("#cpwusername").val();
@@ -232,7 +232,7 @@ $("#cpwbtn").click(function() {
 
     var err = false;
     if(oldpw == "") {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Password must not be empty")
             .insertAfter($("#cpwoldpw").parent().parent());
         $("#cpwoldpw").parent().parent().addClass("error");
@@ -240,7 +240,7 @@ $("#cpwbtn").click(function() {
     }
 
     if(newpw == "") {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Password must not be empty")
             .insertAfter($("#cpwnewpw").parent().parent());
         $("#cpwnewpw").parent().parent().addClass("error");
@@ -248,7 +248,7 @@ $("#cpwbtn").click(function() {
     }
 
     if(newpw != newpwc) {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Passwords do not match")
             .insertAfter($("#cpwconfirm").parent().parent());
         $("#cpwconfirm").parent().parent().addClass("error");
@@ -276,7 +276,7 @@ $("#cpwbtn").click(function() {
             onLogin();
         }
         else {
-            $("<div/>").addClass("alert alert-error")
+            $("<div/>").addClass("alert alert-danger")
                 .text(data.error)
                 .insertBefore($("#changepwpane form"));
         }
@@ -284,13 +284,13 @@ $("#cpwbtn").click(function() {
 });
 
 $("#cebtn").click(function() {
-    $("#changeemailpane").find(".alert-error").remove();
+    $("#changeemailpane").find(".alert-danger").remove();
     $("#changeemailpane").find(".alert-success").remove();
     var name = $("#ceusername").val();
     var pw = $("#cepw").val();
     var email = $("#ceemail").val();
     if(pw == "") {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Please provide a password")
             .insertAfter($("#cepw").parent().parent());
         $("#cepw").parent().parent().addClass("error");
@@ -298,7 +298,7 @@ $("#cebtn").click(function() {
     }
 
     if(!email.match(/^[\w_\.]+@[\w_\.]+[a-zA-Z]+$/)) {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Invalid email")
             .insertAfter($("#ceemail").parent().parent());
         $("#ceemail").parent().parent().addClass("error");
@@ -306,7 +306,7 @@ $("#cebtn").click(function() {
     }
 
     if(email.match(/.*@(localhost|127\.0\.0\.1)/i)) {
-        $("<div/>").addClass("alert alert-error")
+        $("<div/>").addClass("alert alert-danger")
             .text("Nice try, but no.")
             .insertAfter($("#ceemail").parent().parent());
         $("#ceemail").parent().parent().addClass("error");
@@ -329,7 +329,7 @@ $("#cebtn").click(function() {
             onLogin();
         }
         else {
-            $("<div/>").addClass("alert alert-error")
+            $("<div/>").addClass("alert alert-danger")
                 .text(data.error)
                 .insertBefore($("#changeemailpane form"));
         }
@@ -339,7 +339,7 @@ $("#cebtn").click(function() {
 
 $("#rpbtn").click(function() {
     $("#rpbtn").text("Sending...");
-    $("#pwresetpane").find(".alert-error").remove();
+    $("#pwresetpane").find(".alert-danger").remove();
     $("#pwresetpane").find(".alert-success").remove();
     var name = $("#rpusername").val();
     var email = $("#rpemail").val();
@@ -357,7 +357,7 @@ $("#rpbtn").click(function() {
                 .insertBefore($("#pwresetpane form"));
         }
         else {
-            $("<div/>").addClass("alert alert-error")
+            $("<div/>").addClass("alert alert-danger")
                 .text(data.error)
                 .insertBefore($("#pwresetpane form"));
         }
@@ -366,7 +366,7 @@ $("#rpbtn").click(function() {
 });
 
 $("#profilesave").click(function() {
-    $("#profilepane").find(".alert-error").remove();
+    $("#profilepane").find(".alert-danger").remove();
     $("#profilepane").find(".alert-success").remove();
     var img = $("#profileimg").val();
     var text = $("#profiletext").val();
@@ -385,7 +385,7 @@ $("#profilesave").click(function() {
                 .insertBefore($("#profilepane form"));
         }
         else {
-            $("<div/>").addClass("alert alert-error")
+            $("<div/>").addClass("alert alert-danger")
                 .text(data.error)
                 .insertBefore($("#profilepane form"));
         }

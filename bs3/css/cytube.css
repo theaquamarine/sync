@@ -341,3 +341,27 @@
 #search_clear {
     margin-top: 10px;
 }
+
+.well.well-menu {
+    padding: 8px 0;
+}
+
+.well-menu ul > li > a {
+    padding: 3px 15px;
+}
+
+li.nav-header {
+    padding: 3px 15px;
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #aaaaaa;
+    line-height: 24px;
+}
+
+li.nav-active, li.nav-active > a, li.nav-active:hover,
+li.nav-active:hover > a {
+    color: #fff;
+    background-color: #08c;
+}
+

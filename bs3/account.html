@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CyTube - Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Calvin 'calzoneman' 'cyzon' Montgomery">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/navbar-footer.css" rel="stylesheet">
+    <link href="css/cytube.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header"><a href="index.html" class="navbar-brand">CyTube</a></div>
+          <div class="ul nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="https://github.com/calzoneman/sync/wiki/Beginner%27s-Guide-and-FAQ" target="_blank">Help</a></li>
+            <li class="active"><a href="account.html">Account</a></li>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="well well-menu col-lg-4 col-md-4">
+            <ul id="accountnav" class="nav nav-list">
+              <li class="nav-header">Not Logged In</li>
+                          <li><a href="javascript:void(0)" id="register">Register</a></li>
+                          <li><a href="javascript:void(0)" id="login">Login</a></li>
+              <li class="nav-header">Account Control</li>
+                          <li><a href="javascript:void(0)" id="pwchange">Change Password</a></li>
+                          <li><a href="javascript:void(0)" id="pwreset">Reset Password</a></li>
+                          <li><a href="javascript:void(0)" id="profile">Edit Profile</a></li>
+                          <li><a href="javascript:void(0)" id="email">Change Email</a></li>
+                          <li><a href="javascript:void(0)" id="channels">My Channels</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-8 col-md-8">
+            <h3>Select an action from the sidebar</h3>
+          </div>
+          <div id="registerpane" style="display: none" class="col-lg-8 col-md-8">
+            <h3>Register New Account</h3>
+            <form role="form" action="javascript:void(0)" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="regusername" class="col-lg-4 col-md-4 control-label">Username</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="regusername" type="text" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="regpw" class="col-lg-4 col-md-4 control-label">Password</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="regpw" type="password" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="regpwconfirm" class="col-lg-4 col-md-4 control-label">Confirm Password</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="regpwconfirm" type="password" class="form-control">
+                          </div>
+                        </div>
+              <div class="form-group">
+                <div class="col-lg-4 col-md-4"></div>
+                <div class="col-lg-5 col-md-5">
+                  <button id="registerbtn" class="btn btn-primary">Register</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div id="loginpane" style="display: none" class="col-lg-8 col-md-8">
+            <h3>Login</h3>
+            <form role="form" action="javascript:void(0)" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="loginusername" class="col-lg-4 col-md-4 control-label">Username</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="loginusername" type="text" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="loginpw" class="col-lg-4 col-md-4 control-label">Password</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="loginpw" type="password" class="form-control">
+                          </div>
+                        </div>
+              <div class="form-group">
+                <div class="col-lg-4 col-md-4"></div>
+                <div class="col-lg-5 col-md-5">
+                  <button id="loginbtn" class="btn btn-primary">Login</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div id="changepwpane" style="display: none" class="col-lg-8 col-md-8">
+            <h3>Change Password</h3>
+            <form role="form" action="javascript:void(0)" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="cpwusername" class="col-lg-4 col-md-4 control-label">Username</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="cpwusername" type="text" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="cpwoldpw" class="col-lg-4 col-md-4 control-label">Old Password</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="cpwoldpw" type="password" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="cpwnewpw" class="col-lg-4 col-md-4 control-label">New Password</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="cpwnewpw" type="password" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="cpwconfirm" class="col-lg-4 col-md-4 control-label">Confirm New Password</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="cpwconfirm" type="password" class="form-control">
+                          </div>
+                        </div>
+              <div class="form-group">
+                <div class="col-lg-4 col-md-4"></div>
+                <div class="col-lg-5 col-md-5">
+                  <button id="cpwbtn" class="btn btn-primary">Change Password</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div id="pwresetpane" style="display: none" class="col-lg-8 col-md-8">
+            <h3>Reset Password</h3>
+            <form role="form" action="javascript:void(0)" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="rpusername" class="col-lg-4 col-md-4 control-label">Username</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="rpusername" type="text" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="rpemail" class="col-lg-4 col-md-4 control-label">Email</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="rpemail" type="password" class="form-control">
+                          </div>
+                        </div>
+              <div class="form-group">
+                <div class="col-lg-4 col-md-4"></div>
+                <div class="col-lg-5 col-md-5">
+                  <button id="rpbtn" class="btn btn-primary">Send Reset</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div id="profilepane" style="display: none" class="col-lg-8 col-md-8">
+            <h3>Edit Profile</h3>
+            <form role="form" action="javascript:void(0)" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="profileimg" class="col-lg-4 col-md-4 control-label">Image URL</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="profileimg" type="text" class="form-control">
+                          </div>
+                        </div>
+              <div class="form-group">
+                <label for="profiletext" class="col-lg-4 col-md-4 control-label">Text</label>
+                <div class="col-lg-5 col-md-5">
+                  <textarea id="profiletext" rows="10" class="form-control"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-4 col-md-4"></div>
+                <div class="col-lg-5 col-md-5">
+                  <button id="profilesave" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div id="changeemailpane" style="display: none" class="col-lg-8 col-md-8">
+            <h3>Change Email</h3>
+            <form role="form" action="javascript:void(0)" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="ceusername" class="col-lg-4 col-md-4 control-label">Username</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="ceusername" type="text" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="cepw" class="col-lg-4 col-md-4 control-label">Password</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="cepw" type="password" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="ceemail" class="col-lg-4 col-md-4 control-label">Email</label>
+                          <div class="col-lg-5 col-md-5">
+                            <input id="ceemail" type="text" class="form-control">
+                          </div>
+                        </div>
+              <div class="form-group">
+                <div class="col-lg-4 col-md-4"></div>
+                <div class="col-lg-5 col-md-5">
+                  <button id="cebtn" class="btn btn-primary">Update Email</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div id="channelspane" style="display: none" class="col-lg-8 col-md-8">
+            <h3>My Channels</h3>
+            <table id="channellist" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">CyTube Software Copyright &copy; 2013 Calvin Montgomery&nbsp;&middot;&nbsp;Available for free on <a href="http://github.com/calzoneman/sync">GitHub</a>&nbsp;&middot;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5Y7PUVVGVSEWG&lc=US&item_name=CyTube&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Donate</a></p>
+      </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/iourl.js"></script>
+    <script src="js/account.js"></script>
+  </body>
+</html>
