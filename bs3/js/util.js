@@ -1689,7 +1689,9 @@ function genPermissionsEditor() {
     makeOption("Drink calls", "drink", modleader, CHANNEL.perms.drink+"");
     makeOption("Chat", "chat", noanon, CHANNEL.perms.chat+"");
 
-    var submit = $("<button/>").addClass("btn btn-primary").appendTo(fs);
+    var submit = $("<button/>").addClass("btn btn-primary")
+        .css("margin-top", "10px")
+        .appendTo(fs);
     submit.text("Save");
     submit.click(function() {
         var perms = {};

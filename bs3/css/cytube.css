@@ -325,6 +325,10 @@
     margin-bottom: 10px;
 }
 
+.poll-menu {
+    margin-top: 10px;
+}
+
 .option > .btn {
     margin-right: 8px;
 }
