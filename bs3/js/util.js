@@ -576,12 +576,12 @@ function showOptionsMenu() {
         $("<option/>").attr("value", "template")
             .text("Template")
             .appendTo(gen_theme);
+        $("<option/>").attr("value", "css/altdark.css")
+            .text("Alternate Dark")
+            .appendTo(gen_theme);
         /*
         $("<option/>").attr("value", "assets/css/darkstrap.css")
             .text("Dark")
-            .appendTo(gen_theme);
-        $("<option/>").attr("value", "assets/css/altdark.css")
-            .text("Alternate Dark")
             .appendTo(gen_theme);
         */
         gen_theme.val(USEROPTS.theme);
@@ -1055,7 +1055,7 @@ function handleModPermissions() {
 
 function handlePermissionChange() {
     if(CLIENT.rank >= 2) {
-        $("#channelsettingswrap3").show();
+        $("#channelsettingswrap-inner").show();
         if($("#channelsettingswrap").html().trim() == "") {
             $("#channelsettingswrap").load("modoptions.html", handleModPermissions);
         }
@@ -1065,7 +1065,7 @@ function handlePermissionChange() {
     }
     else {
         $("#channelsettingswrap").html("");
-        $("#channelsettingswrap3").hide();
+        $("#channelsettingswrap-inner").hide();
     }
 
     setVisible("#userpltogglewrap", CLIENT.rank >= 1);
