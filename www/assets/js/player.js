@@ -50,11 +50,13 @@ function theYouTubeDevelopersShouldFixTheirShit() {
         });
         return dump;
     };
-    var tmp = PLAYER.player;
-    var keys = Object.keys(tmp);
+    var tmp = {};
+    var keys = Object.keys(PLAYER.player);
     keys.forEach(function (k) {
         if (k === "a" || k === "i") {
             tmp[k] = "[DOM element]";
+        } else {
+            tmp[k] = PLAYER.player[k];
         }
     });
 
