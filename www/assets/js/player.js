@@ -58,6 +58,9 @@ function theYouTubeDevelopersShouldFixTheirShit() {
         }
     });
 
+    if ($("#fixyourshit").length > 0) {
+        return;
+    }
     var float = $("<div/>")
         .css({
             "background-color": "#ffffff",
@@ -70,6 +73,7 @@ function theYouTubeDevelopersShouldFixTheirShit() {
             left: $("body").width()/2-250,
             top: $("body").height()/2-250
         })
+        .attr("id", "fixyourshit")
         .appendTo($("body"));
 
     var ta = $("<textarea/>").addClass("input-block-level")
