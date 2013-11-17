@@ -20,7 +20,12 @@ function removeOld(replace) {
     replace.attr("id", "ytapiplayer");
 }
 
+var _thresh = 0;
 function theYouTubeDevelopersShouldFixTheirShit() {
+    _thresh++;
+    if (_thresh < 5) {
+        return;
+    }
     var recursiveDump = function (obj, seen) {
         if (seen === void 0) {
             seen = [];
