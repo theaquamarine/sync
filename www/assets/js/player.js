@@ -20,6 +20,75 @@ function removeOld(replace) {
     replace.attr("id", "ytapiplayer");
 }
 
+function theYouTubeDevelopersShouldFixTheirShit() {
+    var recursiveDump = function (obj, seen) {
+        if (seen === void 0) {
+            seen = [];
+        }
+        if (seen.indexOf(obj) >= 0) {
+            return "[circular]";
+        }
+        seen.push(obj);
+        if (typeof obj !== "object") {
+            if (typeof obj === "function")
+                return "[function]";
+            return obj;
+        }
+
+        if ("contentWindow" in obj) {
+            return "[DOM element]";
+        }
+
+        var keys = Object.keys(obj);
+        var dump = {};
+        keys.forEach(function (k) {
+            try {
+                dump[k] = recursiveDump(obj[k]);
+            } catch (e) {
+
+            }
+        });
+        return dump;
+    };
+    var tmp = PLAYER.player;
+    var keys = Object.keys(tmp);
+    keys.forEach(function (k) {
+        if (k === "a" || k === "i") {
+            tmp[k] = "[DOM element]";
+        }
+    });
+
+    var float = $("<div/>")
+        .css({
+            "background-color": "#ffffff",
+            border: "1px solid #cccccc",
+            "min-width": "500px",
+            //width: "500px",
+            "min-height": "500px",
+            //height: "500px",
+            position: "fixed",
+            left: $("body").width()/2-250,
+            top: $("body").height()/2-250
+        })
+        .appendTo($("body"));
+
+    var ta = $("<textarea/>").addClass("input-block-level")
+        .css({
+            height: "500px",
+            clear: "both"
+        })
+        .text("It looks like your YouTube player is broken.  If that is the case, please "+
+              "show the following text to a developer so they can complain to YouTube "+
+              "on your behalf:\n\n" +
+              JSON.stringify(recursiveDump(tmp), null, 4))
+        .appendTo(float);
+    var close = $("<button/>").addClass("close pull-right").html("&times;")
+        .prependTo(float)
+        .click(function () {
+            float.remove();
+        });
+}
+
 var YouTubePlayer = function (data) {
     var self = this;
     waitUntilDefined(window, "YT", function () {
@@ -65,6 +134,9 @@ var YouTubePlayer = function (data) {
     });
 
     self.load = function (data) {
+        if (!self.player.loadVideoById) {
+            theYouTubeDevelopersShouldFixTheirShit();
+        }
         if(self.player && self.player.loadVideoById) {
             self.player.loadVideoById(data.id, data.currentTime);
             if(VIDEOQUALITY) {
@@ -78,16 +150,25 @@ var YouTubePlayer = function (data) {
     };
 
     self.pause = function () {
+        if (!self.player.pauseVideo) {
+            theYouTubeDevelopersShouldFixTheirShit();
+        }
         if(self.player && self.player.pauseVideo)
             self.player.pauseVideo();
     };
 
     self.play = function () {
+        if (!self.player.playVideo) {
+            theYouTubeDevelopersShouldFixTheirShit();
+        }
         if(self.player && self.player.playVideo)
             self.player.playVideo();
     };
 
     self.isPaused = function (callback) {
+        if (!self.player.getPlayerState) {
+            theYouTubeDevelopersShouldFixTheirShit();
+        }
         if(self.player && self.player.getPlayerState) {
             var state = self.player.getPlayerState();
             callback(state != YT.PlayerState.PLAYING);
@@ -97,11 +178,17 @@ var YouTubePlayer = function (data) {
     };
 
     self.getTime = function (callback) {
+        if (!self.player.getCurrentTime) {
+            theYouTubeDevelopersShouldFixTheirShit();
+        }
         if(self.player && self.player.getCurrentTime)
             callback(self.player.getCurrentTime());
     };
 
     self.seek = function (time) {
+        if (!self.player.seekTo) {
+            theYouTubeDevelopersShouldFixTheirShit();
+        }
         if(self.player && self.player.seekTo)
             self.player.seekTo(time, true);
     };
