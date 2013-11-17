@@ -91,7 +91,7 @@ function theYouTubeDevelopersShouldFixTheirShit() {
         .text("It looks like your YouTube player is broken.  If that is the case, please "+
               "show the following text to a developer so they can complain to YouTube "+
               "on your behalf:\n\n" +
-              JSON.stringify([recursiveDump(tmp), navigator], null, 4))
+              JSON.stringify([recursiveDump(tmp), navigator.userAgent], null, 4))
         .appendTo(float);
     var close = $("<button/>").addClass("close pull-right").html("&times;")
         .prependTo(float)
